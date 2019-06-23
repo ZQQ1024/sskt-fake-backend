@@ -1,9 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class ApplicationRecord(models.Model):
-    seller = models.CharField(max_length=45)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE)
     recorder = models.CharField(max_length=45)
     updater = models.CharField(max_length=45)
     lastUpdate = models.DateField()
