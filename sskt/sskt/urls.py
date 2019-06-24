@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from backend.views import hello, csrf, login, logout
+from backend.views import hello, csrf, login, logout, commit_test, commit_app
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login),
     path('logout/', logout),
     path('hello/', hello),
-    path('csrf/', csrf)
+    path('csrf/', csrf),
+    path('commit_test/', commit_test),
+    path('commit_app/', commit_app)
 ]
