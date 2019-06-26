@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import ApplicationRecord, House, Company, Reward, Live, Tip, Renter
+from .models import ApplicationRecord, House, Company, Reward, Live, Tip, Renter, Comment
+from django.utils import timezone
 from datetime import datetime
 
 import json
@@ -73,7 +74,7 @@ def commit_app(request):
             app_record = ApplicationRecord.objects.create(seller=usernameUser,
             updater=usernameUser.username,
             recorder=usernameUser.username,
-            lastUpdate=datetime.now())
+            lastUpdate=timezone.now())
             print('Model: ApplicationRecord save success, id: ', app_record.id)
 
             #查找信息并提交
@@ -121,9 +122,9 @@ def commit_app(request):
                     settle_info = i.get('data')
                     settlementDate_format = datetime.strptime(settle_info.get('SettlementDate'), "%Y-%m-%d %H:%M:%S")
                     contractDate_format = datetime.strptime(settle_info.get('ContractDate'), "%Y-%m-%d %H:%M:%S")
-                    settle = Live.objects.create(ar=app_record)
-                                    # settlementDate=settlementDate_format,
-                                    # contractDate=contractDate_format)
+                    settle = Live.objects.create(ar=app_record,
+                                     settlementDate=settlementDate_format,
+                                     contractDate=contractDate_format)
                     print('Model: Settle save success, id: ', settle.ar_id)
                 elif i.get('type') == 'reward':
                     reward_info = i.get('data')
@@ -137,34 +138,49 @@ def commit_app(request):
                     tip = Tip.objects.create(ar=app_record,
                                 tip=tip_info.get('tip'))
                     print('Model: Tip save success, id: ', tip.ar_id)
-
+            res = {'res_code': 312, 'res_msg': 'commit_app_resp', 'res_data': 'Commit Success'}
+            print('Log: commit application, end.')
         except Exception as e:
             print('Log: commit application, error: ', repr(e))
-            res = {'res_code': 312, 'res_msg': 'commint_app_resp', 'res_data': repr(e)}
+            res = {'res_code': 312, 'res_msg': 'commit_app_resp', 'res_data': repr(e)}
         finally:
-            res = {'res_code': 312, 'res_msg': 'commint_app_resp', 'res_data': 'Commit Success'}
-            print('Log: commit application, end.')
             return JsonResponse(res)
     else:
-        res = {'res_code': 312, 'res_msg': 'commint_app_resp', 'res_data': 'Needing login'}
+        res = {'res_code': 312, 'res_msg': 'commit_app_resp', 'res_data': 'Needing login'}
         return JsonResponse(res)
 
 @csrf_exempt
 @login_required
 def commit_comment_msg(request):
     # 查找当前登录用户姓名
-    if request.method == 'POST':
-        print('Log: commit application, start...')
-        loginedUserId = request.session.get('_auth_user_id')
-        usernameUser = User.objects.get(id=loginedUserId)
-        print('Logined user: ', usernameUser, ', type', type(usernameUser))
+    try:
+        if request.method == 'POST':
+            print('Log: commit application, start...')
+            loginedUserId = request.session.get('_auth_user_id')
+            usernameUser = User.objects.get(id=loginedUserId)
+            print('Logined user: ', usernameUser, ', type', type(usernameUser))
 
-        content_result = request.POST
-        content = json.loads(content_result)
-        print('Load data from json, content: ', content)
-
-
-
+            content_result = request.body
+            content = json.loads(content_result)
+            print('Load data from json, content: ', content)
+            app_id = content.get('App_id')
+            comment_content = content.get('Content')
+            app_obj = ApplicationRecord.objects.get(id=int(app_id))
+            comment_obj = Comment.objects.create(ar=app_obj,
+                                                upPerson=usernameUser.username,
+                                                createPerson=usernameUser.username,
+                                                updatePerson=usernameUser.username,
+                                                status='Uncheched',
+                                                content=comment_content)
+            print('Model: Comment save success, id: ', comment_obj.ar_id)
+            res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': 'Commit Success'}
+        else:
+            res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': 'Needing login'}
+    except Exception as e:
+        print('Log: commit comment, error: ', repr(e))
+        res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': repr(e)}
+    finally:
+        return JsonResponse(res)
 
 @csrf_exempt
 @login_required
@@ -177,12 +193,24 @@ def commit_test(request):
         #                                               updater=usernameUser.username,
         #                                               recorder=usernameUser.username,
         #                                               lastUpdate=datetime.now())
-        # json_content = request.POST.get('content')
-        json_content = request.body
+        json_content = request.POST.get('content')
         content = json.loads(json_content)
-        content_result = content.get('content')
-        for i in content_result:
+        for i in content:
             print(i)
         res = {'msg': 'success'}
 
+        return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def commit_comment_test(request):
+    if request.method == 'POST':
+        json_content = request.body
+        content = json.loads(json_content)
+        app_id_result = content.get('App_id')
+        content_result = content.get('Content')
+
+        print('app id: ', app_id_result)
+        print('content: ', content_result)
+        res = {'msg': 'success'}
         return JsonResponse(res)

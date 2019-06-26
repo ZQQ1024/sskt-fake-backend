@@ -7,7 +7,7 @@ class ApplicationRecord(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     recorder = models.CharField(max_length=45)
     updater = models.CharField(max_length=45)
-    lastUpdate = models.DateTimeField(auto_now=True)
+    lastUpdate = models.DateTimeField()
     createDate = models.DateTimeField(auto_now_add=True)
 
 
