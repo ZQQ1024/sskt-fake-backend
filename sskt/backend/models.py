@@ -7,8 +7,8 @@ class ApplicationRecord(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     recorder = models.CharField(max_length=45)
     updater = models.CharField(max_length=45)
-    lastUpdate = models.DateField()
-    createDate = models.DateField(auto_now_add=True)
+    lastUpdate = models.DateTimeField(auto_now=True)
+    createDate = models.DateTimeField(auto_now_add=True)
 
 
 class House(models.Model):
@@ -98,9 +98,9 @@ class Comment(models.Model):
 
     upPerson = models.CharField(max_length=45)
     createPerson = models.CharField(max_length=45)
-    createDate = models.DateField()
+    createDate = models.DateTimeField(auto_now_add=True)
     updatePerson = models.CharField(max_length=45)
-    updateDate = models.DateField()
+    updateDate = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=45)
     content = models.CharField(max_length=45)
 

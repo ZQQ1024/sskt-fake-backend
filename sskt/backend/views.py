@@ -58,6 +58,7 @@ def csrf(request):
 @csrf_exempt
 @login_required
 def commit_app(request):
+    print('Log: commit application, start...')
     if request.method == 'POST':
         try:
             # 查找当前登录用户姓名
@@ -118,11 +119,11 @@ def commit_app(request):
                     print('Model: Thing save success, id: ', thing.ar_id)
                 elif i.get('type') == 'settle':
                     settle_info = i.get('data')
-                    settlementDate_format = datetime.strptime(settle_info.get('SettlementDate'), "%Y-%m-%d %H:%M")
-                    contractDate_format = datetime.strptime(settle_info.get('ContractDate'), "%Y-%m-%d %H:%M")
-                    settle = Live.objects.create(ar=app_record,
-                                    settlementDate=settlementDate_format,
-                                    contractDate=contractDate_format)
+                    settlementDate_format = datetime.strptime(settle_info.get('SettlementDate'), "%Y-%m-%d %H:%M:%S")
+                    contractDate_format = datetime.strptime(settle_info.get('ContractDate'), "%Y-%m-%d %H:%M:%S")
+                    settle = Live.objects.create(ar=app_record)
+                                    # settlementDate=settlementDate_format,
+                                    # contractDate=contractDate_format)
                     print('Model: Settle save success, id: ', settle.ar_id)
                 elif i.get('type') == 'reward':
                     reward_info = i.get('data')
@@ -138,10 +139,32 @@ def commit_app(request):
                     print('Model: Tip save success, id: ', tip.ar_id)
 
         except Exception as e:
+            print('Log: commit application, error: ', repr(e))
             res = {'res_code': 312, 'res_msg': 'commint_app_resp', 'res_data': repr(e)}
         finally:
             res = {'res_code': 312, 'res_msg': 'commint_app_resp', 'res_data': 'Commit Success'}
+            print('Log: commit application, end.')
             return JsonResponse(res)
+    else:
+        res = {'res_code': 312, 'res_msg': 'commint_app_resp', 'res_data': 'Needing login'}
+        return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def commit_comment_msg(request):
+    # 查找当前登录用户姓名
+    if request.method == 'POST':
+        print('Log: commit application, start...')
+        loginedUserId = request.session.get('_auth_user_id')
+        usernameUser = User.objects.get(id=loginedUserId)
+        print('Logined user: ', usernameUser, ', type', type(usernameUser))
+
+        content_result = request.POST
+        content = json.loads(content_result)
+        print('Load data from json, content: ', content)
+
+
+
 
 @csrf_exempt
 @login_required
