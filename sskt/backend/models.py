@@ -6,9 +6,11 @@ from django.contrib.auth.models import User
 class ApplicationRecord(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     recorder = models.CharField(max_length=45)
+    manager_number = models.CharField(max_length=45, default="unset")
     updater = models.CharField(max_length=45)
     lastUpdate = models.DateTimeField()
     createDate = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(default=0)
 
 
 class House(models.Model):
