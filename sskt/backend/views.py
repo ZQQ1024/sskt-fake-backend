@@ -76,6 +76,7 @@ def commit_app(request):
             recorder=usernameUser.username,
             lastUpdate=timezone.now())
             print('Model: ApplicationRecord save success, id: ', app_record.id)
+            ApplicationRecord.objects.get(id=app_record.id).update(manager_number='-'.join('sskt',app_record.id))
 
             #查找信息并提交
             json_request_data = request.body
