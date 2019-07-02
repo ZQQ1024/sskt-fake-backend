@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from backend.views import hello, csrf, login, logout, commit_test,\
-    commit_app, commit_comment_test,commit_comment_msg
+    commit_app, commit_comment_test, commit_comment_msg, applications_info,\
+    comment
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +29,6 @@ urlpatterns = [
     path('commit_app/', commit_app),
     path('commit_comment_test/', commit_comment_test),
     path('commit_comment_msg/', commit_comment_msg),
+    path('applications_info/', applications_info),
+    path('comment_info/', comment)
 ]

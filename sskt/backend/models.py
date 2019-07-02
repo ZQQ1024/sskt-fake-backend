@@ -103,7 +103,7 @@ class Comment(models.Model):
     createDate = models.DateTimeField(auto_now_add=True)
     updatePerson = models.CharField(max_length=45)
     updateDate = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=45)
+    status = models.CharField(max_length=45, default='unchecked')
     content = models.CharField(max_length=45)
 
 

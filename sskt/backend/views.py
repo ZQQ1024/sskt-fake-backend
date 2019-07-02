@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from .models import ApplicationRecord, House, Company, Reward, Live, Tip, Renter, Comment
 from django.utils import timezone
 from datetime import datetime
+from .custom_exception import NullResultQueryException
 
 import json
 
@@ -76,7 +77,7 @@ def commit_app(request):
             recorder=usernameUser.username,
             lastUpdate=timezone.now())
             print('Model: ApplicationRecord save success, id: ', app_record.id)
-            ApplicationRecord.objects.get(id=app_record.id).update(manager_number='-'.join('sskt',app_record.id))
+            ApplicationRecord.objects.filter(id=app_record.id).update(manager_number='-'.join(['sskt', str(app_record.id)]))
 
             #查找信息并提交
             json_request_data = request.body
@@ -153,10 +154,10 @@ def commit_app(request):
 @csrf_exempt
 @login_required
 def commit_comment_msg(request):
-    # 查找当前登录用户姓名
     try:
         if request.method == 'POST':
             print('Log: commit application, start...')
+            # 查找当前登录用户姓名
             loginedUserId = request.session.get('_auth_user_id')
             usernameUser = User.objects.get(id=loginedUserId)
             print('Logined user: ', usernameUser, ', type', type(usernameUser))
@@ -164,17 +165,19 @@ def commit_comment_msg(request):
             content_result = request.body
             content = json.loads(content_result)
             print('Load data from json, content: ', content)
-            app_id = content.get('App_id')
+            sskt_num = content.get('sskt_num')
             comment_content = content.get('Content')
-            app_obj = ApplicationRecord.objects.get(id=int(app_id))
-            comment_obj = Comment.objects.create(ar=app_obj,
-                                                upPerson=usernameUser.username,
-                                                createPerson=usernameUser.username,
-                                                updatePerson=usernameUser.username,
-                                                status='Uncheched',
-                                                content=comment_content)
-            print('Model: Comment save success, id: ', comment_obj.ar_id)
-            res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': 'Commit Success'}
+            app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
+            if len(app_obj) != 0:
+                comment_obj = Comment.objects.create(ar=app_obj[0],
+                                                    upPerson=usernameUser.username,
+                                                    createPerson=usernameUser.username,
+                                                    updatePerson=usernameUser.username,
+                                                    content=comment_content)
+                print('Model: Comment save success, id: ', comment_obj.ar_id)
+                res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': 'Commit Success'}
+            else:
+                print('Model: Comment save failed, Application info not exist, sskt: ', sskt_num)
         else:
             res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': 'Needing login'}
     except Exception as e:
@@ -214,4 +217,109 @@ def commit_comment_test(request):
         print('app id: ', app_id_result)
         print('content: ', content_result)
         res = {'msg': 'success'}
+        return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def applications_info(request):
+    try:
+        app_item = {}
+        res_data = []
+        # 基本返回信息
+        app_objs = ApplicationRecord.objects.all()
+        # print('Search application result: ', app_objs)
+        for i in app_objs:
+            print('---------', i, '----------')
+            app_item = {}
+            app_item.setdefault('manager_number', i.manager_number)
+            app_item.setdefault('recorder', i.recorder)
+            app_item.setdefault('status', i.status)
+            app_item.setdefault('update_person', i.updater)
+            app_item.setdefault('update_time', i.lastUpdate)
+            app_item.setdefault('commit_time', i.createDate)
+            print('Base info finished')
+
+            user_obj = User.objects.get(id=i.seller.id)
+            app_item.setdefault('seller', user_obj.username)
+            print('Seller info finished')
+
+            manager_obj = Company.objects.filter(ar_id=i.id)
+            if len(manager_obj) != 0:
+                app_item.setdefault('manager_name', manager_obj[0].managerCompanyName)
+                app_item.setdefault('manager_phone', manager_obj[0].managerCompanyPhone)
+            else:
+                app_item.setdefault('manager_name', 'None')
+                app_item.setdefault('manager_phone', 'None')
+            print('Company info finished')
+
+            house_obj = House.objects.filter(ar_id=i.id)
+            if len(house_obj) != 0:
+                app_item.setdefault('item_name', house_obj[0].thingName)
+                app_item.setdefault('item_number', house_obj[0].thingNumber)
+            else:
+                app_item.setdefault('item_name', 'None')
+                app_item.setdefault('item_number', 'None')
+            print('Thing info finished')
+            # 标红状态
+            comment_objs = Comment.objects.filter(ar_id=i.id)
+            spe_flag = 1
+            if len(comment_objs) != 0:
+                for j in comment_objs:
+                    if j.status == 'unchecked':
+                        spe_flag = 0
+                        break
+                if spe_flag == 0:
+                    app_item.setdefault('specify_flag', 'RED')
+                elif spe_flag == 1:
+                    app_item.setdefault('specify_flag', 'NORMAL')
+            else:
+                app_item.setdefault('specify_flag', 'NORMAL')
+            print('Specify_flag info finished')
+            print('-----------------------------------------------')
+            res_data.append(app_item)
+
+    except Exception as e:
+        print('Log: show applications, error: ', repr(e))
+        res = {'res_code': 311, 'res_msg': 'applications_info', 'res_repr': repr(e), 'res_data': res_data}
+        return JsonResponse(res)
+    finally:
+        res = {'apps_info': res_data}
+        return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def comment(request):
+    try:
+        res_item = {}
+        res_data = []
+        sskt_num = request.GET.get('sskt_num')
+        app_res = ApplicationRecord.objects.filter(manager_number=sskt_num)
+        if len(app_res) != 0:
+            comment_res = Comment.objects.filter(ar_id=app_res[0].id)
+        else:
+            comment_res = None
+
+        if comment_res is None or len(comment_res) == 0:
+            raise NullResultQueryException('Loc: comment(), comment result not exist')
+        else:
+            for i in comment_res:
+                res_item = {}
+                res_item.setdefault('CreatePerson', i.createPerson)
+                res_item.setdefault('CreateDate', i.createDate)
+                res_item.setdefault('UpdatePerson', i.updatePerson)
+                res_item.setdefault('UpdateDate', i.updateDate)
+                res_item.setdefault('Status', i.status)
+                res_item.setdefault('Content', i.content)
+                res_data.append(res_item)
+
+    except Exception as e:
+        print('Log: show comment, error: ', repr(e))
+        res = {'res_code': 313, 'res_msg': 'comment_resp', 'res_repr': repr(e), 'res_data': res_data}
+        return JsonResponse(res)
+    # except NullResultQueryException as nullresult_e:
+    #     print('Log: show comment, error: ', repr(nullresult_e))
+    #     res = {'res_code': 313, 'res_msg': 'comment_resp', 'res_repr': repr(nullresult_e), 'res_data': res_data}
+    #     return JsonResponse(res)
+    finally:
+        res = {'comments_info': res_data}
         return JsonResponse(res)
