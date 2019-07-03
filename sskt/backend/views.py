@@ -323,3 +323,178 @@ def comment(request):
     finally:
         res = {'comments_info': res_data}
         return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def app_info_detail(request):
+    print('--------Searching app info detail, start.--------')
+    try:
+        res_data = []
+        sskt_num = request.GET.get('sskt_num')
+        app_res = ApplicationRecord.objects.filter(manager_number=sskt_num)
+        if len(app_res) != 0:
+            app_id = app_res[0].id
+        else:
+            app_id = None
+
+        if app_id is None:
+            raise NullResultQueryException('Loc: app_info_detail(), application info detail'
+                                           ' result not exist')
+        else:
+            # 添加SSKT番号
+            sskt_data = {'type': 'sskt_num',
+                        'data': {
+                            'sskt_num': sskt_num
+                        }}
+            res_data.append(sskt_data)
+            print('sskt num info completed')
+            # 查询租户信息
+            renter_obj = Renter.objects.filter(ar_id=app_id)
+            if len(renter_obj) != 0:
+                renter_data = {'type': 'renter',
+                               'data': {
+                                   'UserNameWrite': renter_obj[0].userNameWrite,
+                                   'UserNameAlias': renter_obj[0].userNameAlias,
+                                   'UserNameRead': renter_obj[0].userNameRead,
+                                   'UserAddr': renter_obj[0].userAddr,
+                                   'UserAddrPostCode': renter_obj[0].userAddrPostcode,
+                                   'UserPhone': renter_obj[0].userPhone
+                               }}
+            else:
+                renter_data = {'type': 'renter',
+                               'data': {
+                                   'UserNameWrite': 'Null',
+                                   'UserNameAlias': 'Null',
+                                   'UserNameRead': 'Null',
+                                   'UserAddr': 'Null',
+                                   'UserAddrPostCode': 'Null',
+                                   'UserPhone': 'Null'
+                               }}
+            res_data.append(renter_data)
+            print('renter info completed')
+            # 查询管理公司信息
+            manager_obj = Company.objects.filter(ar_id=app_id)
+            if len(manager_obj) != 0:
+                manager_data = {
+                    'type': 'manager',
+                    'data': {
+                        'ManagerCompanyName': manager_obj[0].managerCompanyName,
+                        'ManagerCompanyAddr': manager_obj[0].managerCompanyAddr,
+                        'ManagerCompanyChargerName': manager_obj[0].managerCompanyChargerName,
+                        'ManagerCompanyPhone': manager_obj[0].managerCompanyPhone
+                    }}
+            else:
+                manager_data = {
+                    'type': 'manager',
+                    'data': {
+                        'ManagerCompanyName': 'Null',
+                        'ManagerCompanyAddr': 'Null',
+                        'ManagerCompanyChargerName': 'Null',
+                        'ManagerCompanyPhone': 'Null'
+                    }}
+            res_data.append(manager_data)
+            print('company info completed')
+            # 查询物件信息
+            thing_obj = House.objects.filter(ar_id=app_id)
+            if len(thing_obj) != 0:
+                thing_data = {
+                    'type': 'thing',
+                    'data': {
+                        'ThingName': thing_obj[0].thingName,
+                        'ThingNumber': thing_obj[0].thingNumber,
+                        'ThingStructI': thing_obj[0].structI,
+                        'ThingStructII': thing_obj[0].structII,
+                        'ThingArea': str(thing_obj[0].thingArea),
+                        'ThingStayPeopleNumber': str(thing_obj[0].stayPeopleNumber),
+                        'ThingAddr': thing_obj[0].thingAddr,
+                        'ThingAddrPostcode': thing_obj[0].thingAddrPostcode,
+                        'ThingRentCost': thing_obj[0].thingRentCost,
+                        'ThingManageCost': thing_obj[0].thingManageCost,
+                        'ThingGiftCost': thing_obj[0].thingGiftCost,
+                        'ThingDepositCost': thing_obj[0].thingDepositCost,
+                        'ThingReliefCost': thing_obj[0].thingReliefCost
+                    }}
+            else:
+                thing_data = {
+                    'type': 'thing',
+                    'data': {
+                        'ThingName': 'Null',
+                        'ThingNumber': 'Null',
+                        'ThingStructI': 'Null',
+                        'ThingStructII': 'Null',
+                        'ThingArea': 'Null',
+                        'ThingStayPeopleNumber': 'Null',
+                        'ThingAddr': 'Null',
+                        'ThingAddrPostcode': 'Null',
+                        'ThingRentCost': 'Null',
+                        'ThingManageCost': 'Null',
+                        'ThingGiftCost': 'Null',
+                        'ThingDepositCost': 'Null',
+                        'ThingReliefCost': 'Null',
+                    }}
+            res_data.append(thing_data)
+            print('thing info completed')
+            # 查询入住信息
+            settle_obj = Live.objects.filter(ar_id=app_id)
+            if len(settle_obj) != 0:
+                settle_data = {
+                    'type': 'settle',
+                    'data': {
+                        'SettlementDate': datetime.strftime(settle_obj[0].settlementDate, "%Y-%m-%d"),
+                        'ContractDate': datetime.strftime(settle_obj[0].contractDate, "%Y-%m-%d")
+                }}
+            else:
+                settle_data = {
+                    'type': 'settle',
+                    'data': {
+                        'SettlementDate': 'Null',
+                        'ContractDate': 'Null'
+                    }}
+            res_data.append(thing_data)
+            print('settle info completed')
+            # 查询报酬信息
+            reward_obj = Reward.objects.filter(ar_id=app_id)
+            if len(reward_obj) != 0:
+                reward_data = {
+                    'type': 'reward',
+                    'data': {
+                        'AD': reward_obj[0].AD,
+                        'AgencyFee': reward_obj[0].agencyFee,
+                        'BackFee': reward_obj[0].backFee,
+                }}
+            else:
+                reward_data = {
+                    'type': 'reward',
+                    'data': {
+                        'AD': 'Null',
+                        'AgencyFee': 'Null',
+                        'BackFee': 'Null'
+                    }}
+            res_data.append(reward_data)
+            print('reward info completed')
+            # 查询备注信息
+            tip_obj = Tip.objects.filter(ar_id=app_id)
+            if len(tip_obj) != 0:
+                tip_data = {
+                    'type': 'tip',
+                    'data': {
+                        'tip': tip_obj[0].tip
+                }}
+            else:
+                tip_data = {
+                    'type': 'tip',
+                    'data': {
+                        'tip': 'Null'
+                }}
+            res_data.append(tip_data)
+            print('tip info completed')
+
+    except Exception as e:
+        print('Log: show app info, error: ', repr(e))
+        res = {'res_code': 3121, 'res_msg': 'resp_app_info_deatail', 'res_repr': repr(e), 'res_data': res_data}
+        print('--------Searching app info detail, end.--------')
+        return JsonResponse(res)
+    finally:
+        res = {'content': res_data}
+        print('--------Searching app info detail, end.--------')
+        return JsonResponse(res)
