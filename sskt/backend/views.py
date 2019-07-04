@@ -4,10 +4,11 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import ApplicationRecord, House, Company, Reward, Live, Tip, Renter, Comment
+from .models import ApplicationRecord, House, Company, Reward, Live, Tip, Renter, Comment, File
 from django.utils import timezone
 from datetime import datetime
-from .custom_exception import NullResultQueryException
+from .custom_exception import NullResultQueryException, NoneUploadfileException, UploadfileExistedException
+import os
 
 import json
 
@@ -498,3 +499,62 @@ def app_info_detail(request):
         res = {'content': res_data}
         print('--------Searching app info detail, end.--------')
         return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def commit_app_uploadfile(request):
+    print('--------Upload file, start.--------')
+    try:
+        if request.method == 'POST':
+            # 查询关联的文件
+            sskt_num = request.POST.get('sskt_num')
+            app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
+            if len(app_obj) != 0:
+                app_id = app_obj[0].id
+            else:
+                app_id = -1
+            if app_id == -1:
+                print('null result searching for application')
+                raise NullResultQueryException('Loc: commit_app_uploadfile(), searching for'
+                                               ' application failed')
+
+            # 上传文件存储位置，不存在则新建
+            up_path = './uploadfile'
+            filename = request.POST.get('file_name')
+            up_path = up_path + '/' + app_obj[0].manager_number
+            print('upload file absolute path: ', os.path.abspath(up_path))
+            folder = os.path.exists(up_path)
+            if not folder:
+                print('make dir: ', up_path)
+                os.makedirs(up_path)
+
+            up_name = up_path + '/' + filename
+            # 文件查重
+            file_sear_obj = File.objects.filter(path=up_name)
+            if len(file_sear_obj) != 0:
+                print('uploadfile_fail, file exist')
+                raise UploadfileExistedException('Loc: commit_app_uploadfile(), upload file existed.')
+
+            file_obj = File.objects.create(ar=app_obj[0],
+                                           path=up_name)
+            print('Model: File save success. file id: ', file_obj.id)
+
+            file_data = request.FILES.get('upload_file', None)
+            if not file_data:
+                print('None upload file')
+                raise NoneUploadfileException('Loc: commit_app_uploadfile()')
+            with open(up_name, 'wb') as f:
+                for chunk in file_data.chunks():
+                    f.write(chunk)
+                print('Upload file over')
+
+    except Exception as e:
+        print('Log: upload file fail, error: ', str(e))
+        res = {'res_code': 3152, 'res_msg': 'uploadfile fail', 'res_repr': str(e)}
+        print('--------Upload file error, end.--------')
+        return JsonResponse(res)
+    else:
+        res = {'res_code': 3151, 'res_msg': 'uploadfile succ'}
+        print('--------Upload file, end.--------')
+        return JsonResponse(res)
+

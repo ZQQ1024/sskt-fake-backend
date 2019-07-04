@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from backend.views import hello, csrf, login, logout, commit_test,\
     commit_app, commit_comment_test, commit_comment_msg, applications_info,\
-    comment, app_info_detail
+    comment, app_info_detail, commit_app_uploadfile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,4 +32,5 @@ urlpatterns = [
     path('applications_info/', applications_info),
     path('comment_info/', comment),
     path('applications_info_detail/', app_info_detail),
+    path('commit_app_apploadfile/', commit_app_uploadfile),
 ]
