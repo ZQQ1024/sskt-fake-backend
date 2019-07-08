@@ -7,8 +7,11 @@ from django.contrib.auth.models import User
 from .models import ApplicationRecord, House, Company, Reward, Live, Tip, Renter, Comment, File
 from django.utils import timezone
 from datetime import datetime
-from .custom_exception import NullResultQueryException, NoneUploadfileException, UploadfileExistedException
+from .custom_exception import NullResultQueryException, NoneUploadfileException, UploadfileExistedException,\
+    NoMatchingAppException
+from .tools import cus_quick_sort
 import os
+import copy
 
 import json
 
@@ -57,6 +60,9 @@ def logout(request):
 @ensure_csrf_cookie
 def csrf(request):
      return HttpResponse('Hello world')
+
+def working_flag(string, flag='starting'):
+    print('--------', string, ', ', flag, '.--------')
 
 @csrf_exempt
 @login_required
@@ -506,7 +512,7 @@ def commit_app_uploadfile(request):
     print('--------Upload file, start.--------')
     try:
         if request.method == 'POST':
-            # 查询关联的文件
+            # 查询关联的申请记录
             sskt_num = request.POST.get('sskt_num')
             app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
             if len(app_obj) != 0:
@@ -558,3 +564,110 @@ def commit_app_uploadfile(request):
         print('--------Upload file, end.--------')
         return JsonResponse(res)
 
+
+@csrf_exempt
+@login_required
+def doc(request):
+    print('--------Doc, start--------')
+    try:
+        res_data = []
+        file_content = {}
+        file_obj = File.objects.all()
+        print('start making file content dict')
+        for i in file_obj:
+            # print(i.ar_id, i.path)
+            file_value = []
+            # first insert value
+            file_content.setdefault(i.ar_id, file_value)
+            file_content[i.ar_id].append(i.path)
+        print('end making file content dict')
+        for j in file_content:
+            file_temp = {}
+            app_obj = ApplicationRecord.objects.filter(id=j)
+            if len(app_obj) > 0:
+                file_temp['SSKT_number'] = app_obj[0].manager_number
+                file_temp['file_string'] = file_content[j]
+            else:
+                file_temp['SSKT_number'] = 'Unknown'
+                file_temp['file_string'] = file_content[j]
+                raise NoMatchingAppException('Loc: doc(). ApplicationRecord id: ', i.ar_id)
+            res_data.append(file_temp)
+    except Exception as e:
+        print('Doc error: ', repr(e))
+        print('--------Doc error.--------')
+    finally:
+        print(res_data)
+        res = {'content': res_data}
+        print('--------Doc, end.--------')
+        return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def maincontent_info(request):
+    working_flag('maincontent_info', 'starting')
+    try:
+        res_data=[]
+        has_name=[]
+        rank_temp = {'rank': 0, 'username': 'null', 'money': 0, 'number': 0}
+        app_objs = ApplicationRecord.objects.all()
+        if len(app_objs) > 0:
+            for i in app_objs:
+                print('username: ', i.seller.username)
+                if i.seller.username in has_name:
+                    working_flag('fun!!!', '1')
+                    index = has_name.index(i.seller.username)
+                    item = res_data[index]
+                    item['number'] += 1
+                    reward_obj = Reward.objects.filter(ar_id=i.id)
+                    if len(reward_obj) > 0:
+                        item['money'] += int(reward_obj[0].AD) + int(reward_obj[0].agencyFee) \
+                                         - int(reward_obj[0].backFee)
+                    else:
+                        item['money'] += 0
+                else:
+                    working_flag('fun!!!', '2')
+                    has_name.append(i.seller.username)
+                    item = copy.deepcopy(rank_temp)
+                    item['username'] = i.seller.username
+                    item['number'] += 1
+                    reward_obj = Reward.objects.filter(ar_id=i.id)
+                    if len(reward_obj) > 0:
+                        item['money'] += int(reward_obj[0].AD) + int(reward_obj[0].agencyFee)\
+                                         - int(reward_obj[0].backFee)
+                    else:
+                        item['money'] += 0
+                    res_data.append(item)
+            print('App count completed.')
+
+            # quick sort for res_data
+            cus_quick_sort(res_data, 0, len(res_data)-1)
+            rank_index = 1
+            for i in res_data:
+                i['rank'] = rank_index
+                rank_index += 1
+            print('Res data sort completed')
+        else:
+            raise NullResultQueryException('Loc: maincontent_info(), ApplicationRecord '
+                                           'has no items')
+    except Exception as e:
+        res = {'content': []}
+        print('Maincontent_info error: ', repr(e))
+        working_flag('maincontent_info', 'error')
+        return JsonResponse(res)
+    else:
+        res = {'content': res_data}
+        working_flag('maincontent_info', 'end')
+        return JsonResponse(res)
+
+
+def quick_sort_test(request):
+    arry = []
+    arry.append({'rank': 0, 'username': '1', 'money': 5, 'number': 0})
+    arry.append({'rank': 0, 'username': '2', 'money': 1, 'number': 0})
+    arry.append({'rank': 0, 'username': '3', 'money': 4, 'number': 0})
+    arry.append({'rank': 0, 'username': '4', 'money': 3, 'number': 0})
+    arry.append({'rank': 0, 'username': '5', 'money': 8, 'number': 0})
+
+    cus_quick_sort(arry,0,len(arry)-1)
+    print(arry)
+    return HttpResponse(200)
