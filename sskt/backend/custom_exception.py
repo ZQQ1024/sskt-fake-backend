@@ -22,3 +22,11 @@ class UploadfileExistedException(Exception):
 
     def __str__(self):
         return self.ErrorInfo
+
+class NoMatchingAppException(Exception):
+    def __init__(self, ErrorInfo):
+        super().__init__(self)
+        self.ErrorInfo = '  '.join(['No mathcing Application, ', ErrorInfo])
+
+    def __str__(self):
+        return self.ErrorInfo
