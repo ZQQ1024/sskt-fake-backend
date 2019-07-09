@@ -177,7 +177,7 @@ def commit_comment_msg(request):
             app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
             if len(app_obj) != 0:
                 comment_obj = Comment.objects.create(ar=app_obj[0],
-                                                    upPerson=usernameUser.username,
+                                                    upPerson=app_obj[0].seller.username,
                                                     createPerson=usernameUser.username,
                                                     updatePerson=usernameUser.username,
                                                     content=comment_content)
@@ -330,6 +330,11 @@ def comment(request):
     finally:
         res = {'comments_info': res_data}
         return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def confirm_comment(request):
+    pass
 
 @csrf_exempt
 @login_required
