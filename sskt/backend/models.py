@@ -114,12 +114,15 @@ class File(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=45)
-    leader = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default='null')
+    leader = models.IntegerField(null=True, blank=True, default=0)
 
 class UserGroup(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.SET_DEFAULT, default='null')
-    is_admin = models.IntegerField(default=0)
+    group = models.IntegerField(null=True, blank=True)
+
+class UserAdmin(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_admin = models.IntegerField(null=True, blank=True)
 
 
 

@@ -4,15 +4,16 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import ApplicationRecord, House, Company, Reward, Live, Tip, Renter, Comment, File
+from .models import ApplicationRecord, House, Company, Reward, Live, Tip, Renter, Comment, File, UserGroup, UserAdmin, \
+    Group
 from django.utils import timezone
 from datetime import datetime
 from .custom_exception import NullResultQueryException, NoneUploadfileException, UploadfileExistedException,\
-    NoMatchingAppException
+    NoMatchingAppException, ConfirmCommentFailException, UserGroupErrorException, GroupErrorException
 from .tools import cus_quick_sort
 import os
 import copy
-
+import traceback
 import json
 
 # Create your views here.
@@ -45,6 +46,15 @@ def login(request):
         res = {'res_code': 112, 'res_msg': 'login_failed', 'res_data': ''}
 
     return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def login_status(request):
+    if request.method == 'POST':
+        logined_user = User.objects.get(id=request.session.get('_auth_user_id'))
+        print('session: ', request.session)
+        res = {'username': logined_user.username}
+        return JsonResponse(res)
 
 @csrf_exempt
 def logout(request):
@@ -311,6 +321,7 @@ def comment(request):
         else:
             for i in comment_res:
                 res_item = {}
+                res_item.setdefault('Comment_id', i.id)
                 res_item.setdefault('CreatePerson', i.createPerson)
                 res_item.setdefault('CreateDate', i.createDate)
                 res_item.setdefault('UpdatePerson', i.updatePerson)
@@ -334,7 +345,34 @@ def comment(request):
 @csrf_exempt
 @login_required
 def confirm_comment(request):
-    pass
+    working_flag('confirm_comment', 'start')
+    try:
+        if request.method == 'POST':
+            json_content = request.body
+            content = json.loads(json_content)
+            comment_id = content.get('Comment_id')
+            comment_obj = Comment.objects.filter(id=comment_id)
+            if len(comment_obj) > 0:
+                if comment_obj[0].status == 'Unchecked':
+                    comment_obj.update(status='Checked')
+                else:
+                    error_str = 'Loc: confirm_comment(), comment status error, comment id: ' + str(comment_id) +\
+                                ', status: ' + comment_obj[0].status
+                    raise ConfirmCommentFailException(error_str)
+            else:
+                error_str = 'Loc: confirm_comment(), comment is not exist, comment id: ' + comment_id
+                raise ConfirmCommentFailException(error_str)
+        else:
+            raise ConfirmCommentFailException('Loc: confirm_comment(), submit method is not POST.')
+    except Exception as e:
+        working_flag('confirm_comment', 'error')
+        traceback.print_exc()
+        res = {'res_code': 316, 'res_msg': 'confirm failed'}
+        return JsonResponse(res)
+    else:
+        working_flag('confirm_comment', 'end')
+        res = {'res_code': 316, 'res_msg': 'confirm successed'}
+        return JsonResponse(res)
 
 @csrf_exempt
 @login_required
@@ -676,3 +714,56 @@ def quick_sort_test(request):
     cus_quick_sort(arry,0,len(arry)-1)
     print(arry)
     return HttpResponse(200)
+
+@csrf_exempt
+@login_required
+def permission_add_admin(request):
+    working_flag('permission_add_admin', 'start')
+    try:
+        if request.method == 'POST':
+            loginedUserId = request.session.get('_auth_user_id')
+            usernameUser_obj = User.objects.filter(id=loginedUserId)
+            user_group_obj = UserAdmin.objects.filter(user=usernameUser_obj[0])
+            if len(user_group_obj) > 0:
+                user_group_obj.update(is_admin=3)
+            else:
+                new_user_group_obj = UserAdmin.objects.create(
+                                            user=usernameUser_obj[0],
+                                            is_admin=3)
+        else:
+            raise UserGroupErrorException('Loc: permission_add_admin(), submit method is not POST.')
+    except Exception as e:
+        res = {'res_code': 512, 'res_msg': 'add admin failed'}
+        traceback.print_exc()
+        working_flag('permission_add_admin', 'error')
+        return JsonResponse(res)
+    else:
+        res = {'res_code': 512, 'res_msg': 'add admin successed'}
+        working_flag('permission_add_admin', 'end')
+        return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def permission_add_group(request):
+    working_flag('permission_add_group', 'start')
+    try:
+        if request.method == 'POST':
+            content = json.loads(request.body)
+            group_name = content.get('name')
+            group_object = Group.objects.filter(name=group_name)
+            if len(group_object) > 0:
+                raise GroupErrorException('Loc: permission_add_group(), group is extisted, add failed.')
+            else:
+                new_group_object = Group.objects.create(name=group_name)
+        else:
+            raise GroupErrorException('Loc: permission_add_group(), submit method is not POST.')
+    except Exception as e:
+        res = {'res_code': 511, 'res_msg': 'add group failed'}
+        traceback.print_exc()
+        working_flag('permission_add_group', 'error')
+        return JsonResponse(res)
+    else:
+        res = {'res_code': 511, 'res_msg': 'add group successed'}
+        working_flag('permission_add_group', 'end')
+        return JsonResponse(res)
+
