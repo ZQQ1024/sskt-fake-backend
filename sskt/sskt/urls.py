@@ -19,7 +19,7 @@ from backend.views import hello, csrf, login, logout, commit_test,\
     commit_app, commit_comment_test, commit_comment_msg, applications_info,\
     comment, app_info_detail, commit_app_uploadfile, doc, quick_sort_test,\
     maincontent_info, confirm_comment, login_status, permission_add_admin,\
-    permission_add_group
+    permission_add_group,permission_add_user_to_group, permission_addgroup_leader
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,4 +42,6 @@ urlpatterns = [
     path('permission_add_admin/', permission_add_admin),
     path('logined_status/', login_status),
     path('permission_add_group/', permission_add_group),
+    path('permission_add_user_to_group/', permission_add_user_to_group),
+    path('permission_add_group_leader/', permission_addgroup_leader),
 ]

@@ -56,3 +56,19 @@ class GroupErrorException(Exception):
 
     def __str__(self):
         return self.ErrorInfo
+
+class AddGroupErrorException(Exception):
+    def __init__(self, ErrorInfo):
+        super().__init__(self)
+        self.ErrorInfo = '  '.join(['Add user to group error.', ErrorInfo])
+
+    def __str__(self):
+        return self.ErrorInfo
+
+class NameCollecErrorException(Exception):
+    def __init__(self, ErrorInfo):
+        super().__init__(self)
+        self.ErrorInfo = '  '.join(['Get name collection error.', ErrorInfo])
+
+    def __str__(self):
+        return self.ErrorInfo

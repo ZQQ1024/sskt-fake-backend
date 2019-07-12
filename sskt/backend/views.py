@@ -9,7 +9,8 @@ from .models import ApplicationRecord, House, Company, Reward, Live, Tip, Renter
 from django.utils import timezone
 from datetime import datetime
 from .custom_exception import NullResultQueryException, NoneUploadfileException, UploadfileExistedException,\
-    NoMatchingAppException, ConfirmCommentFailException, UserGroupErrorException, GroupErrorException
+    NoMatchingAppException, ConfirmCommentFailException, UserGroupErrorException, GroupErrorException,\
+    AddGroupErrorException, NameCollecErrorException
 from .tools import cus_quick_sort
 import os
 import copy
@@ -236,18 +237,85 @@ def commit_comment_test(request):
         res = {'msg': 'success'}
         return JsonResponse(res)
 
+def get_name_collec(username_str):
+    res_data = []
+    working_flag('get_name_collec()', 'start')
+    print('name string: ', username_str)
+    try:
+        user_obj = User.objects.filter(username=username_str)
+        # print(len(user_obj))
+        if len(user_obj) > 0:
+            user_id = user_obj[0].id
+            user_admin_obj = UserAdmin.objects.filter(user=user_obj[0])
+            if len(user_admin_obj) > 0:
+                print('usr is in admin table')
+                if user_admin_obj[0].is_admin == 1:
+                    print('user is admin')
+                    for i in User.objects.all():
+                        res_data.append(i.username)
+            else:
+                print('usr is not in admin table')
+                usergroup__obj = UserGroup.objects.filter(user=user_obj[0])
+                if len(usergroup__obj) > 0:
+                    group_obj = Group.objects.filter(id=usergroup__obj[0].group)
+                    if len(group_obj) > 0:
+                        print('user is group leader, group: ', group_obj[0].name)
+                        if group_obj[0].leader == user_id:
+                            user_group_collec_obj = UserGroup.objects.all()
+                            for j in user_group_collec_obj:
+                                if j.group == group_obj[0].id:
+                                    res_data.append(j.user.username)
+                        else:
+                            # user in user's group, but no leader
+                            print('user in user\'s group, but no leader')
+                            res_data.append(username_str)
+                    else:
+                        # usergroup's group not existed
+                        print('usergroup\'s group not existed')
+                        res_data.append(username_str)
+                else:
+                    # user's usergroup not existed
+                    print('user\'s usergroup not existed')
+                    res_data.append(username_str)
+    except Exception as e:
+        res_data.clear()
+        traceback.print_exc()
+        print('Loc: get_name_collec()', repr(e))
+        working_flag('get_name_collec', 'error')
+        return res_data
+    else:
+        working_flag('get_name_collec', 'end')
+        return res_data
+
+
 @csrf_exempt
 @login_required
 def applications_info(request):
+    working_flag('applications_info()', 'start')
+    res_data = []
     try:
+        user_id = request.session.get('_auth_user_id')
+        user_obj = User.objects.filter(id=user_id)
+        # print(user_obj[0].username, ' ', type(user_obj[0].username))
+        name_collec = get_name_collec(user_obj[0].username)
+        # name_collec = []
+        print('Name collection: ', name_collec)
+
         app_item = {}
-        res_data = []
         # 基本返回信息
         app_objs = ApplicationRecord.objects.all()
-        # print('Search application result: ', app_objs)
+        print('Search app info start: ')
         for i in app_objs:
+            if i.seller.username not in name_collec:
+                print('Skip, username: ', i.seller.username)
+                continue
             print('---------', i, '----------')
             app_item = {}
+
+            user_obj = User.objects.get(id=i.seller.id)
+            app_item.setdefault('seller', user_obj.username)
+            print('Seller info finished')
+
             app_item.setdefault('manager_number', i.manager_number)
             app_item.setdefault('recorder', i.recorder)
             app_item.setdefault('status', i.status)
@@ -255,10 +323,6 @@ def applications_info(request):
             app_item.setdefault('update_time', i.lastUpdate)
             app_item.setdefault('commit_time', i.createDate)
             print('Base info finished')
-
-            user_obj = User.objects.get(id=i.seller.id)
-            app_item.setdefault('seller', user_obj.username)
-            print('Seller info finished')
 
             manager_obj = Company.objects.filter(ar_id=i.id)
             if len(manager_obj) != 0:
@@ -296,10 +360,13 @@ def applications_info(request):
             res_data.append(app_item)
 
     except Exception as e:
+        traceback.print_exc()
         print('Log: show applications, error: ', repr(e))
         res = {'res_code': 311, 'res_msg': 'applications_info', 'res_repr': repr(e), 'res_data': res_data}
+        working_flag('applications_info', 'error')
         return JsonResponse(res)
-    finally:
+    else:
+        working_flag('applications_info', 'end')
         res = {'apps_info': res_data}
         return JsonResponse(res)
 
@@ -725,7 +792,7 @@ def permission_add_admin(request):
             usernameUser_obj = User.objects.filter(id=loginedUserId)
             user_group_obj = UserAdmin.objects.filter(user=usernameUser_obj[0])
             if len(user_group_obj) > 0:
-                user_group_obj.update(is_admin=3)
+                user_group_obj.update(is_admin=1)
             else:
                 new_user_group_obj = UserAdmin.objects.create(
                                             user=usernameUser_obj[0],
@@ -750,6 +817,7 @@ def permission_add_group(request):
         if request.method == 'POST':
             content = json.loads(request.body)
             group_name = content.get('name')
+
             group_object = Group.objects.filter(name=group_name)
             if len(group_object) > 0:
                 raise GroupErrorException('Loc: permission_add_group(), group is extisted, add failed.')
@@ -767,3 +835,67 @@ def permission_add_group(request):
         working_flag('permission_add_group', 'end')
         return JsonResponse(res)
 
+@csrf_exempt
+@login_required
+def permission_addgroup_leader(request):
+    working_flag('permission_addgroup_leader', 'start')
+    try:
+        if request.method == 'POST':
+            content = json.loads(request.body)
+            group_name = content.get('name')
+            leader_name = content.get('leader')
+
+            user_obj = User.objects.filter(username=leader_name)
+            group_object = Group.objects.filter(name=group_name)
+            if len(group_object) > 0:
+                if len(user_obj) > 0:
+                    group_object.update(leader=user_obj[0].id)
+            else:
+                raise GroupErrorException('Loc: permission_addgroup_leader(), group not existed.')
+                # new_group_object = Group.objects.create(name=group_name)
+        else:
+            raise GroupErrorException('Loc: permission_addgroup_leader(), submit method is not POST.')
+    except Exception as e:
+        res = {'res_code': 514, 'res_msg': 'add group leader failed'}
+        traceback.print_exc()
+        working_flag('permission_addgroup_leader', 'error')
+        return JsonResponse(res)
+    else:
+        res = {'res_code': 511, 'res_msg': 'add group leader successed'}
+        working_flag('permission_addgroup_leader', 'end')
+        return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def permission_add_user_to_group(request):
+    working_flag('permission_add_user_to_group', 'start')
+    try:
+        if request.method == 'POST':
+            loginedUserId = request.session.get('_auth_user_id')
+            usernameUser_obj = User.objects.filter(id=loginedUserId)
+
+            content = json.loads(request.body)
+            group_name = content.get('group_name')
+            group_obj = Group.objects.filter(name=group_name)
+            if len(group_obj) > 0:
+                group_id = group_obj[0].id
+            else:
+                raise AddGroupErrorException('Loc: permission_add_user_to_group(), group not existed.')
+
+            user_group_obj = UserGroup.objects.filter(user=usernameUser_obj[0])
+            if len(user_group_obj) > 0:
+                user_group_obj.update(group=group_id)
+            else:
+                new_user_group = UserGroup.objects.create(user=usernameUser_obj[0],
+                                                          group=group_id)
+        else:
+            raise AddGroupErrorException('Loc: permission_add_user_to_group(), submit method is not POST.')
+    except Exception as e:
+        res = {'res_code': 513, 'res_msg': 'add user to group failed'}
+        traceback.print_exc()
+        working_flag('permission_add_user_to_group', 'error')
+        return JsonResponse(res)
+    else:
+        res = {'res_code': 513, 'res_msg': 'add user to group successed'}
+        working_flag('permission_add_user_to_group', 'end')
+        return JsonResponse(res)
