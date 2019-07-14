@@ -112,4 +112,17 @@ class File(models.Model):
 
     path = models.CharField(max_length=45)
 
+class Group(models.Model):
+    name = models.CharField(max_length=45)
+    leader = models.IntegerField(null=True, blank=True, default=0)
+
+class UserGroup(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.IntegerField(null=True, blank=True)
+
+class UserAdmin(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_admin = models.IntegerField(null=True, blank=True)
+
+
 
