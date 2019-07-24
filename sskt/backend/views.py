@@ -899,3 +899,9 @@ def permission_add_user_to_group(request):
         res = {'res_code': 513, 'res_msg': 'add user to group successed'}
         working_flag('permission_add_user_to_group', 'end')
         return JsonResponse(res)
+
+def index(request):
+    return render(request, 'index.html')
+
+def login_page(request):
+    return render(request, 'login.html')

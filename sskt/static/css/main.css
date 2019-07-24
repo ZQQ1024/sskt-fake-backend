@@ -1,0 +1,12 @@
+a{text-decoration: none;}
+ul{list-style:none;}
+.tli.on{background: black;color: white;}
+.display{display: none;}
+.buttonLX{width: 70px;
+    height: 60px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #4CAF50;border: none;
+    position: fixed;
+    top: 890px;right: 60px;}

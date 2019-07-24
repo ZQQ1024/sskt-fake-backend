@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/css/main.css" />
+		<link rel="stylesheet" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script type="text/javascript" src="/static/js/jquery-3.1.1.min.js" ></script>
+		<script type="text/javascript" src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="/static/js/main.js" ></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0;background-color:#3C8DBC ;">
+		    <div class="col-lg-2" style="padding: 0;">
+		    	<div style="background-color:#367FA9;width:100%;height: 50px;padding-left: 75px;">
+		    		<h3 style="margin: 0;padding-top: 10px;">CHANGTIAN</h3>
+		    	</div>
+		    </div>
+		    <div class="col-lg-10">
+		    	<p id="person" style="margin-top: 15px;float: right;margin-right: 20px;">XXXXXX</p>
+		    </div>
+		    <div class="winTan display" style="position: absolute;width: 300px;height: 200px;background: #28A4C9;left:1590px ;top: 40px;z-index: 100;border: 1px solid #DCDCDC;">
+		   			<p style="margin-top: 15px;text-align: center;color: white;">一颗-李宝成</p>
+		   			<p style="margin-top: 15px;text-align: center;color: white;">Member subce admin 2019-08-31 04:54:11</p>
+		   			<div style="background: whitesmoke;height: 40px;margin-top: 88px;">
+		   				<button id="setUp" class="btn btn-success btn-sm" style="margin-top: 5px;margin-left: 20px;">设置</button>
+						<button id="logout" class="btn btn-primary btn-sm" style="margin-top: 5px;margin-left: 165px;">退出</button>
+		   			</div>
+		   	</div>
+		</nav>
+		<div class="container" style="width: 100%;padding: 0;">
+			<div class="col-lg-2" style="background-color: #222D32;height: 915px;padding: 0;margin-left: 1px;margin-top: -1px;">
+			 	<div class="row" style="background: black;margin: 0;height: 50px;">
+			 		<p style="color: #B7D5DB;margin: 0;line-height: 50px;margin-left: 40px;">xxx</p>
+			 	</div>
+		    	<ul style="padding: 0">
+		    		<li class="tli on" id="main1" style="height: 50px;"><p style="color: #B7D5DB;margin: 0;line-height: 50px;margin-left: 40px;"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp;&nbsp;&nbsp;揭示板</p></li>
+		    		<li class="tli" id="main2" style="height: 50px;"><p style="color: #B7D5DB;margin: 0;line-height: 50px;margin-left: 40px;"><i class="fa fa-building"></i>&nbsp;&nbsp;&nbsp;&nbsp;申入一览</p></li>
+		    		<li class="tli" id="main3" style="height: 50px;"><p style="color: #B7D5DB;margin: 0;line-height: 50px;margin-left: 40px;"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;&nbsp; 资料管理</p></li>
+		    	</ul>
+		    </div>
+		    <div class="col-lg-10" style="height: 915px;padding: 0;width: 83.2%;margin-top: -1px;overflow-x: hidden;overflow-y: scroll;">
+		    	<div class="main main-1" style="">
+		    		<div class="row" style="margin: 0;">
+		    			<h2 style="margin-left:20px ;">揭示板</h2>
+		    		</div>
+		    		<div class="row" style="margin: 0;margin-top: 50px;">
+		    			<div class="col-md-12">
+		    				<div class="row" style="width: 95%;height: 700px;border: 1px solid #E08400;margin-left: 10px;border-radius: 6px;background-color: ;position: relative;">
+		    					<div class="row" style="width: 100%;height: 700px;border: 1px solid #E08F88;margin-left: 0px;border-radius: 6px;background-color: ;position: relative;float: left;">
+			    					<div class="row" style="background-color: #DD4B39;height: 50px;margin: 0;position: relative;">
+			    						<p style="padding-left: 24px;margin: 0;line-height: 50px;color: white;font-size: 24px;">2019年5月申请卖上排名</p>
+			    						<a href="#" style="position: absolute;top: 12px;left: 90%;"><span class="close" style="color: white;">x</span></a>
+			    						<a href="#" style="position: absolute;top: 12px;left: 96%;"><span class="close" style="color: white;">-</span></a>
+			    					</div>
+			    					<div class="row" style="background-color: white;margin: 0;margin-top: 20px;">
+			    						<table id="table-1" class="table" style="" border="0">
+			    							<thead>
+											    <tr style="height: 50px;">
+												    <th></th>
+												    <th>排名</th>
+												    <th>名字</th>
+												    <th>申请卖上</th>
+												    <th>单数</th>
+											    </tr>
+											</thead>
+											<tbody>
+											    <tr style="height: 50px;">
+												    <td>图片1</td>
+												    <td>1</td>
+												    <td>付晓瑞</td>
+												    <td>11111111</td>
+												    <td>9</td>
+											    </tr>
+											    <tr style="height: 50px;">
+											       <td>图片2</td>
+												    <td>2</td>
+												    <td>xxxx</td>
+												    <td>222222</td>
+												    <td>8</td>
+											    </tr>
+											    <tr style="height: 50px;">
+											       <td>图片3</td>
+												    <td>3</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											    <tr style="height: 50px;">
+											        <td></td>
+												    <td>4</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr style="height: 50px;">
+											        <td></td>
+												    <td>5</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr style="height: 50px;">
+											        <td></td>
+												    <td>6</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr style="height: 50px;">
+											        <td></td>
+												    <td>7</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr style="height: 50px;">
+											        <td></td>
+												    <td>8</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr style="height: 50px;">
+											        <td></td>
+												    <td>9</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr style="height: 50px;">
+											        <td></td>
+												    <td>10</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											  </tbody>
+			    						</table>
+			    					</div>
+			    				</div>
+		    					
+		    				</div>
+		    				<!--<div class="row" style="width: 95%;height: 505px;;margin-left: 10px;margin-top:20px;">
+		    					<div class="row" style="width: 49%;height: 505px;border: 1px solid #E08F88;margin-left: 0px;border-radius: 6px;background-color: ;position: relative;float: left;">
+			    					<div class="row" style="background-color: #DD4B39;height: 50px;margin: 0;position: relative;">
+			    						<p style="padding-left: 24px;margin: 0;line-height: 50px;color: white;font-size: 24px;">2019年5月申请卖上排名</p>
+			    						<a href="#" style="position: absolute;top: 12px;left: 90%;"><span class="close" style="color: white;">x</span></a>
+			    						<a href="#" style="position: absolute;top: 12px;left: 96%;"><span class="close" style="color: white;">-</span></a>
+			    					</div>
+			    					<div class="row" style="background-color: white;margin: 0;margin-top: 20px;">
+			    						
+			    					</div>
+			    				</div>
+			    				<div class="row" style="width: 49%;height: 505px;border: 1px solid #63C39A;margin-left: 37px;border-radius: 6px;background-color:;position: relative;float: left;">
+			    					<div class="row" style="background-color: #00A65A;height: 50px;margin: 0;position: relative;">
+			    						<p style="padding-left: 24px;margin: 0;line-height: 50px;color: white;font-size: 24px;">2019年5月签约卖上排名</p>
+			    						<a href="#" style="position: absolute;top: 12px;left: 90%;"><span class="close" style="color: white;">x</span></a>
+			    						<a href="#" style="position: absolute;top: 12px;left: 96%;"><span class="close" style="color: white;">-</span></a>
+			    					</div>
+			    					<div class="row" style="background-color: white;margin: 0;margin-top: 20px;">
+			    						<table id="table-2" class="table" style="" border="0">
+			    							<thead>
+											    <tr>
+												    <th></th>
+												    <th>排名</th>
+												    <th>名字</th>
+												    <th>申请卖上</th>
+												    <th>单数</th>
+											    </tr>
+											</thead>
+											<tbody>
+											    <tr>
+												    <td>图片1</td>
+												    <td>1</td>
+												    <td>付晓瑞</td>
+												    <td>11111111</td>
+												    <td>9</td>
+											    </tr>
+											    <tr>
+											       <td>图片2</td>
+												    <td>2</td>
+												    <td>xxxx</td>
+												    <td>222222</td>
+												    <td>8</td>
+											    </tr>
+											    <tr>
+											       <td>图片3</td>
+												    <td>3</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											    <tr>
+											        <td></td>
+												    <td>4</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr>
+											        <td></td>
+												    <td>5</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr>
+											        <td></td>
+												    <td>6</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr>
+											        <td></td>
+												    <td>7</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr>
+											        <td></td>
+												    <td>8</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr>
+											        <td></td>
+												    <td>9</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											     <tr>
+											        <td></td>
+												    <td>10</td>
+												    <td>xxxx</td>
+												    <td>11111111</td>
+												    <td>7</td>
+											    </tr>
+											  </tbody>
+			    						</table>
+			    					</div>
+			    				</div>
+		    				</div>
+		    				<div class="row" style="width: 95%;height: 205px;;margin-left: 10px;margin-top:20px;">
+		    					<div class="row" style="width: 100%;height: 205px;border: 1px solid #F39C12;margin-left: 0px;border-radius: 6px;background-color: ;position: relative;float: left;">
+			    					<div class="row" style="background-color: #F39C12;height: 50px;margin: 0;position: relative;">
+			    						<p style="padding-left: 24px;margin: 0;line-height: 50px;color: white;font-size: 24px;">社内通知</p>
+			    						<a href="#" style="position: absolute;top: 12px;left: 95%;"><span class="close" style="color: white;">x</span></a>
+			    						<a href="#" style="position: absolute;top: 12px;left: 98%;"><span class="close" style="color: white;">-</span></a>
+			    					</div>
+			    					<div class="row" style="background-color: white;margin: 0;margin-top: 20px;">
+			    						<table id="table-3" class="table" style="padding: 20px">
+			    							<thead>
+											    <tr>
+												    <th>内容</th>
+												    <th>时间</th>
+											    </tr>
+											</thead>
+											<tbody>
+											    <tr>
+												    <td>图片1</td>
+												    <td>1</td>
+											    </tr>
+											  </tbody>
+			    						</table>	
+			    					</div>
+			    				</div>
+		    				</div>
+		    			</div>-->
+		    			<!--<div class="col-md-3">
+		    				<div class="row" style="width: 80%;height: 100%;border: 1px solid #63D2EF;margin-left: 10px;">
+		    					<div class="row" style="background-color: #00C0EF;height: 50px;margin: 0;position: relative;">
+		    						<p style="padding-left: 24px;margin: 0;line-height: 50px;color: white;font-size: 24px;">Online一览</p>
+		    						<a href="#" style="position: absolute;top: 12px;left: 85%;"><span class="close" style="color: white;">x</span></a>
+		    						<a href="#" style="position: absolute;top: 12px;left: 94%;"><span class="close" style="color: white;">-</span></a>
+		    					</div>
+		    					<div class="row" style="background-color: white;margin: 0;">
+		    						<div class="row" style="background-color: ;height: 50px;margin: 0;position: relative;">
+		    							<p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">XXXX</p>
+			    					</div>
+		    						<ul style="padding: 0;margin: 0;">
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">一课-xxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">二课-xxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">三课-xxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">一课-xxxxxxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">二课-xxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">一课-xxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">二课-xxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">一课-xxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">一课-xxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">二课-xxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">三课-xxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">一课-xxxxxxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">二课-xxxxxx</p></li>
+		    							<li style="height: 50px;"><p style="padding-left: 24px;margin: 0;line-height: 50px;color: ;">一课-xxxxxxxxxx</p></li>
+		    						</ul>
+		    					</div>
+		    				</div>-->
+		    			</div>
+		    		</div>
+		    	</div>
+		   		<div class="main main-2 display">
+		   			<div class="talAll tal-1">
+		   				<div class="row" style="margin: 0;">
+			    			<h2 style="margin-left:20px ;">申达一览&nbsp;&nbsp;<span style="font-size: 16px;">担当用</span></h2>
+			    		</div>
+			    		<div class="row" style="margin: 0;margin-top: 20px;">
+			    			<div class="row" style="margin: 0;margin-left: 25px;border: 1px solid #CCCCCC;margin-right: 20px;">
+			    				<div class="row" style="margin: 0;float: right;margin-right: 10px;margin-bottom: 10px;">
+			    					<button class="btn btn-success" id="newFile"><i class="fa fa-download">&nbsp;&nbsp;&nbsp;新规普通</i></button>
+			    					<!--<button class="btn btn-success"><i class="fa fa-download">&nbsp;&nbsp;&nbsp;新规LEO</i></button>
+			    					<button class="btn btn-success"><i class="fa fa-download">&nbsp;&nbsp;&nbsp;新规团地</i></button>-->
+			    					<button class="btn btn-primary"><i class="fa fa-filter">&nbsp;&nbsp;&nbsp;筛选</i></button>
+			    				</div>
+			    				<div class="row" style="margin: 0;">
+			    					<table id="table-4" class="table" style="" border="0" style="">
+			    							<thead>
+											    <tr>
+												    <th>社内番号</th>
+												    <th>管理会社名</th>
+												    <th>管理会电话</th>
+												    <th>物件名</th>
+												    <th>号室</th>
+												    <th>入契日</th>
+												    <th>XXXXXXX</th>
+												    <th>担当</th>
+												    <th>事物</th>
+												    <th>最后更新者</th>
+												    <th>更新时间</th>
+												    <th>申请时间</th>
+												    <th>操作</th>
+											    </tr>
+											</thead>
+											<tbody>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											   	 <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											    <tr>
+												    <td>sstk-3258</td>
+												    <td>xxxxxxxxxxxxxxxxxx</td>
+												    <td>16516516516</td>
+												    <td>xxxxxxxxxxxxxxxxxxxxxx</td>
+												    <td>222</td>
+												    <td>图片1</td>
+												    <td>图片2</td>
+												    <td>一棵-李保成</td>
+												    <td>事物-徐中也</td>
+												    <td>一棵-李保成</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>2019-08-08 	11:11：11</td>
+												    <td>
+												    	<button class="btn btn-success btn-xs btnZH">照会</button>
+		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
+												    </td>
+											    </tr>
+											  </tbody>
+			    						</table>
+			    				</div>
+			    			</div>
+			    		</div>
+		   			</div>
+		   			<div class="talAll tal-2 display">
+		   				<div class="row" style="margin: 0;">
+			    			<h2 style="margin-left:20px ;">普通申入书新规作成&nbsp;&nbsp;<span style="font-size: 16px;">担当用</span></h2>
+			    		</div>
+			    		<div class="row" style="margin: 0;margin-top: 20px;">
+			    			<div class="row" style="margin: 0;margin-left: 25px;border: 1px solid #CCCCCC;margin-right: 20px;overflow-x: hidden;overflow-y: scroll;">
+			    				<h4 style="margin-left:20px ;">新规普通作成</h4>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">契约者</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">电话</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">座机电话</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">地址</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">贷主情报（管理会社）</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社担当者名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社电话</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">物件情报</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">物件名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">号室</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">入契日情报</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入局日</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">契约日</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">报酬</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD（事务所）</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金（事务所）</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金（事务所）</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">备考</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<textarea style="width: 650px;float: right;margin-right: 360px;height: 100px;resize: none;" /></textarea>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">追加</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px ;">文什么XXXXXXXXX</h4>
+					    			<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;position: relative;">
+						    			<p style="margin: 0;margin-left: 54px;font-size: 16px;font-weight: bold;">选择文档</p>
+						    			<select style="margin-left: 40px;height: 32px;width: 100px;">
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<input style="margin-left: 20px;height: 32px;width: 200px;" type="text" />
+						    			<label style="margin-bottom: 0;">
+						    				<input style="height: 32px;width: 75px;opacity: 0;float: left;" type="file" value="选择"/>
+						    				<img src="img/2.png" style="float:left;margin-left: -75px;"/>
+						    			</label>
+						    			<p style="margin:0;margin-left: 20px;font-weight: bold;">到</p>
+						    			<select style="margin-left: 20px;height: 32px;width: 120px;">
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<button class="btn" style="background-color:#F39C12;margin-left: 40px;">追加</button>
+						    		</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;margin-top: 20px;margin-bottom: 20px;">
+					    			<button id="btnNewFile" class="btn" style="background-color:#00BBE9;margin-left: 40px;">提交申请</button>
+					    		</div>
+			    			</div>
+			    		</div>
+		   			</div>
+		   			<div class="talAll tal-3 display">
+		   				<div class="row" style="margin: 0;">
+			    			<h2 style="margin-left:20px ;">照会</h2>
+			    		</div>
+			    		<div class="row" style="margin: 0;margin-top: 20px;overflow-x: hidden;overflow-y: scroll;">
+			    			<div class="row" style="margin: 0;margin-left: 25px;border: 1px solid #CCCCCC;margin-right: 20px;position: relative;">
+			    				<div class="row" style="margin: 0;">
+			    					<h4 style="margin-left:20px ;float: left;">照会</h4>
+			    					<button class="btn btn-warning" style="float: right;margin-top: 10px;margin-right: 20px;" id="changeTxt">修正</button>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">契约者</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">电话</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">座机电话</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">地址</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">贷主情报（管理会社）</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社担当者名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社电话</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">物件情报</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">物件名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">号室</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">入契日情报</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入局日</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">契约日</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">报酬</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD（事务所）</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金（事务所）</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金（事务所）</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">备考</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<textarea style="width: 650px;float: right;margin-right: 360px;height: 100px;resize: none;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/></textarea>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">追加</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;margin-bottom: 20px;">
+			    					<h4 style="margin-left:58px ;">文什么XXXXXXXXX</h4>
+					    			<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;position: relative;">
+						    			<p style="margin: 0;margin-left: 54px;font-size: 16px;font-weight: bold;">选择文档</p>
+						    			<select style="margin-left: 40px;height: 32px;width: 100px;" disabled="true">
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<input style="margin-left: 20px;height: 32px;width: 200px;" type="text" disabled="disabled" placeholder="C：xsax/s"/>
+						    			<label style="margin-bottom: 0;">
+						    				<input style="height: 32px;width: 75px;opacity: 0;float: left;" type="file" value="选择" disabled="disabled"/>
+						    				<img src="img/2.png" style="float:left;margin-left: -75px;"/>
+						    			</label>
+						    			<p style="margin:0;margin-left: 20px;font-weight: bold;">到</p>
+						    			<select style="margin-left: 20px;height: 32px;width: 120px;" disabled="true">
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<button class="btn" style="background-color:#F39C12;margin-left: 40px;">追加</button>
+						    		</div>
+			    				</div>
+			    				<!--<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;margin-top: 20px;margin-bottom: 20px;">
+					    			<button class="btn" style="background-color:#00BBE9;margin-left: 40px;">提交申请</button>
+					    		</div>-->
+					    		<button type="button" class="btn btn-default buttonLX" id="lianXi1">联系</button>
+			    			</div>
+			    		</div>
+		   			</div>
+		   			<div class="talAll tal-4 display">
+		   				<div class="row" style="margin: 0;">
+			    			<h2 style="margin-left:20px ;">照会</h2>
+			    		</div>
+			    		<div class="row" style="margin: 0;margin-top: 20px;overflow-x: hidden;overflow-y: scroll;">
+			    			<div class="row" style="margin: 0;margin-left: 25px;border: 1px solid #CCCCCC;margin-right: 20px;position: relative;">
+			    				<h4 style="margin-left:20px ;">照会修改</h4>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">契约者</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">电话</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">座机电话</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">地址</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">贷主情报（管理会社）</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社担当者名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社电话</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">物件情报</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">物件名</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">号室</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">入契日情报</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入局日</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">契约日</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">报酬</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD（事务所）</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金（事务所）</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金（事务所）</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">备考</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<textarea style="width: 650px;float: right;margin-right: 360px;height: 100px;resize: none;" placeholder="啊啊啊啊啊啊啊啊"/></textarea>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">追加</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;margin-bottom: 20px;">
+			    					<h4 style="margin-left:58px ;">文什么XXXXXXXXX</h4>
+					    			<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;position: relative;">
+						    			<p style="margin: 0;margin-left: 54px;font-size: 16px;font-weight: bold;">选择文档</p>
+						    			<select style="margin-left: 40px;height: 32px;width: 100px;" >
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<input style="margin-left: 20px;height: 32px;width: 200px;" type="text"placeholder="C：xsax/s"/>
+						    			<label style="margin-bottom: 0;">
+						    				<input style="height: 32px;width: 75px;opacity: 0;float: left;" type="file" value="选择"/>
+						    				<img src="img/2.png" style="float:left;margin-left: -75px;"/>
+						    			</label>
+						    			<p style="margin:0;margin-left: 20px;font-weight: bold;">到</p>
+						    			<select style="margin-left: 20px;height: 32px;width: 120px;" >
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<button class="btn" style="background-color:#F39C12;margin-left: 40px;">追加</button>
+						    		</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;margin-top: 20px;margin-bottom: 20px;">
+					    			<button class="btn" style="background-color:#00BBE9;margin-left: 40px;">确认修改</button>
+					    		</div>
+					    		<button type="button" class="btn btn-default buttonLX" id="lianXi2">联系</button>
+			    			</div>
+			    		</div>
+		   			</div>
+		   			<div class="talAll tal-5 display">
+		   				<div class="row" style="margin: 0;">
+			    			<h2 style="margin-left:20px ;">联系事项登录</h2>
+			    		</div>
+			    		<div class="row" style="margin: 0;margin-top: 20px;">
+			    			<div class="row" style="margin: 0;margin-left: 25px;border: 1px solid #CCCCCC;margin-right: 20px;position: relative;height: 825px;overflow-x: hidden;overflow-y: scroll;">
+			    				<h4 style="margin-left:20px ;">联络事项</h4>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<div class="col-lg-3">
+			    						<p style="font-weight: bold;margin-top: 8px;margin-right: 10px;float: right;">联络事项履历</p>
+			    					</div>
+			    					<div class="col-lg-8">
+			    						<table id="table-3" class="table" style="" border="0">
+			    							<thead>
+											    <tr>
+												    <th>内容</th>
+												    <th>创建者</th>
+												    <th>创建时间</th>
+												    <th>更新者</th>
+												    <th>更新时间</th>
+												    <th>操作</th>
+											    </tr>
+											</thead>
+											<tbody>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">fadsf</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    <tr>
+												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td>付晓瑞</td>
+												    <td>2019-03-11 10:44:15</td>
+												    <td><button class="btn">完成</button></td>
+											    </tr>
+											    
+											</tbody>
+			    						</table>
+			    						<div class="row" style="margin: 0;margin-top: 20px;">
+			    							<p style="font-weight: bold;margin-left: 8px;">联络事项追加</p>
+			    							<textarea style="width: 960px;height: 100px;resize: none;margin-left: 8px;"></textarea>
+			    						</div>
+			    						<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;margin-top: 20px;margin-bottom: 20px;">
+							    			<button class="btn" style="background-color:#00BBE9;margin-left: 40px;">追加</button>
+							    		</div>
+			    					</div>
+		    						<div class="col-lg-1">
+			    						
+			    					</div>
+			    				</div>
+			    				
+					    		<button type="button" class="btn btn-default buttonLX" id="zhaoHui" style="right:  80px;">照会</button>
+			    			</div>
+			    		</div>
+		   			</div>
+		   		</div>
+		   		<div class="main main-3 display" style="background-color:#ECF0F5;height: 915px;">
+		   			<div class="row" style="margin: 0;">
+		    			<h2 style="margin-left:20px ;">资料管理</h2>
+		    		</div>
+		    		<div class="row" style="margin: 0;margin-top: 20px;">
+		    			<div class="row" style="margin: 0;margin-left: 25px;margin-right: 20px;">
+		    				<div class="row" style="margin: 0;border: 1px solid #CCCCCC;background-color: white;">
+		    					<div class="row" style="margin: 0;">
+					    			<h4 style="margin-left:20px ;">文什么XXXXXXXXX</h4>
+					    			<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;position: relative;">
+						    			<p style="margin: 0;margin-left: 20px;font-size: 16px;">xxxxxxxxxxxx</p>
+						    			<select style="margin-left: 20px;height: 32px;width: 250px;">
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<input style="margin-left: 20px;height: 32px;width: 400px;" type="text" />
+						    			<label style="margin-bottom: 0;">
+						    				<input style="height: 32px;width: 75px;opacity: 0;float: left;" type="file" value="选择"/>
+						    				<img src="img/2.png" style="float:left;margin-left: -75px;"/>
+						    			</label>
+						    			<p style="margin:0;margin-left: 60px;">到</p>
+						    			<select style="margin-left: 20px;height: 32px;width: 250px;">
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<button class="btn" style="background-color:#F39C12;margin-left: 40px;">追加</button>
+						    		</div>
+						    		<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;margin-top: 20px;margin-bottom: 20px;">
+						    			<button class="btn" style="background-color:#00BBE9;margin-left: 40px;">送信</button>
+						    		</div>
+					    		</div>
+		    				</div>
+		    				<div class="row" style="margin: 0;margin-top: 20px;">
+		    					<input style="height: 32px;width: 1230px;" type="text" />
+		    					<button class="btn" style="background-color:#3C8DBC;margin-left: 40px;color: white;"><i class="fa fa-search"></i>&nbsp;检索</button>
+		    					<button class="btn" style="background-color:#F39C12;color: white;"><i class="fa fa-refresh"></i>&nbsp;重置</button>
+		    				</div>
+		    				<div class="row" style="margin: 0;margin-top: 1px;height: 620px;background: white;border: 1px solid #CCCCCC;border-top: 1px solid #204D74;overflow-x: hidden;overflow-y: scroll;">
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
+		    				</div>
+		    			</div>
+		    		</div>
+		   		</div>
+		   		
+		    </div>
+		</div>
+	</body>
+</html>
