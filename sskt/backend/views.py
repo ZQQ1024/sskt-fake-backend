@@ -146,6 +146,9 @@ def check_appinfo(content):
     try:
         int(content.get('ThingArea'))
         int(content.get('ThingStayPeopleNumber'))
+        int(content.get('AD'))
+        int(content.get('AgencyFee'))
+        int(content.get('BackFee'))
         datetime.strptime(content.get('ContractDate'), "%Y-%m-%d")
         datetime.strptime(content.get('SettlementDate'), "%Y-%m-%d")
     except Exception as e:
@@ -161,9 +164,149 @@ def check_appinfo(content):
 @login_required
 def update_app(request):
     working_flag('Update app info', 'starting')
-    print('sskt num: ', request.POST.get('sskt_num'))
+    try:
+        # 查找当前登录用户姓名
+        loginedUserId = request.session.get('_auth_user_id')
+        usernameUser = User.objects.get(id=loginedUserId)
+        print('Logined user: ', usernameUser, ', type', type(usernameUser))
 
-    return HttpResponse(200)
+        if not check_appinfo(request.POST):
+            raise ApplicationInfoErrorException('Check app info fail')
+        if request.method == 'POST':
+            sskt_num = request.POST.get('sskt_num')
+            print('sskt num: ', sskt_num)
+            app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
+            if len(app_obj) > 0:
+                app_id = app_obj[0].id
+                content_json = form2json(request.POST)
+                content = json.loads(content_json)
+                content_data = content.get('content')
+
+                for i in content_data:
+                    # app关联的renter
+                    if i.get('type') == 'renter':
+                        renter_info = i.get('data')
+                        renter_obj = Renter.objects.filter(ar_id=app_id)
+                        if len(renter_obj)>0:
+                            renter_obj.update(userNameWrite=renter_info.get('UserNameWrite'),
+                                                userNameAlias=renter_info.get('UserNameAlias'),
+                                                userNameRead=renter_info.get('UserNameRead'),
+                                                userAddr=renter_info.get('UserAddr'),
+                                                userAddrPostcode=renter_info.get('UserAddrPostCode'),
+                                                userPhone=renter_info.get('UserPhone'))
+                            print('Model: Renter update success, id: ', renter_obj[0].ar_id)
+                        else:
+                            renter = Renter.objects.create(ar=app_obj[0],
+                                                userNameWrite=renter_info.get('UserNameWrite'),
+                                                userNameAlias=renter_info.get('UserNameAlias'),
+                                                userNameRead=renter_info.get('UserNameRead'),
+                                                userAddr=renter_info.get('UserAddr'),
+                                                userAddrPostcode=renter_info.get('UserAddrPostCode'),
+                                                userPhone=renter_info.get('UserPhone'))
+                            print('Model: Renter rebuild success, id: ', renter.ar_id)
+                    elif i.get('type') == 'manager':
+                        company_info = i.get('data')
+                        company_obj = Company.objects.filter(ar_id=app_id)
+                        if len(company_obj)>0:
+                            company_obj.update(managerCompanyName=company_info.get('ManagerCompanyName'),
+                                                managerCompanyAddr=company_info.get('ManagerCompanyAddr'),
+                                                managerCompanyChargerName=company_info.get('ManagerCompanyChargerName'),
+                                                managerCompanyPhone=company_info.get('ManagerCompanyPhone'))
+                            print('Model: Manager update success, id: ', company_obj[0].ar_id)
+                        else:
+                            company = Company.objects.create(ar=app_obj[0],
+                                                             managerCompanyName=company_info.get('ManagerCompanyName'),
+                                                             managerCompanyAddr=company_info.get('ManagerCompanyAddr'),
+                                                             managerCompanyChargerName=company_info.get(
+                                                                 'ManagerCompanyChargerName'),
+                                                             managerCompanyPhone=company_info.get('ManagerCompanyPhone'))
+                            print('Model: Manager rebuild success, id: ', company.ar_id)
+                    elif i.get('type') == 'thing':
+                        thing_info = i.get('data')
+                        thing_obj = House.objects.filter(ar_id=app_id)
+                        if len(thing_obj)>0:
+                            thing_obj.update(thingName=thing_info.get('ThingName'),
+                                                thingNumber=thing_info.get('ThingNumber'),
+                                                structI=thing_info.get('ThingStructI'),
+                                                structII=thing_info.get('ThingStructII'),
+                                                thingArea=int(thing_info.get('ThingArea')),
+                                                stayPeopleNumber=int(thing_info.get('ThingStayPeopleNumber')),
+                                                thingAddr=thing_info.get('ThingAddr'),
+                                                thingAddrPostcode=thing_info.get('ThingAddrPostcode'),
+                                                thingRentCost=thing_info.get('ThingRentCost'),
+                                                thingManageCost=thing_info.get('ThingManageCost'),
+                                                thingGiftCost=thing_info.get('ThingGiftCost'),
+                                                thingDepositCost=thing_info.get('ThingDepositCost'),
+                                                 thingReliefCost=thing_info.get('ThingReliefCost'))
+                            print('Model: Thing update success, id: ', thing_obj[0].ar_id)
+                        else:
+                            thing = House.objects.create(ar=app_obj[0],
+                                                         thingName=thing_info.get('ThingName'),
+                                                         thingNumber=thing_info.get('ThingNumber'),
+                                                         structI=thing_info.get('ThingStructI'),
+                                                         structII=thing_info.get('ThingStructII'),
+                                                         thingArea=int(thing_info.get('ThingArea')),
+                                                         stayPeopleNumber=int(thing_info.get('ThingStayPeopleNumber')),
+                                                         thingAddr=thing_info.get('ThingAddr'),
+                                                         thingAddrPostcode=thing_info.get('ThingAddrPostcode'),
+                                                         thingRentCost=thing_info.get('ThingRentCost'),
+                                                         thingManageCost=thing_info.get('ThingManageCost'),
+                                                         thingGiftCost=thing_info.get('ThingGiftCost'),
+                                                         thingDepositCost=thing_info.get('ThingDepositCost'),
+                                                         thingReliefCost=thing_info.get('ThingReliefCost'))
+                            print('Model: Thing rebuild success, id: ', thing.ar_id)
+                    elif i.get('type') == 'settle':
+                        settle_info = i.get('data')
+                        settle_obj = Live.objects.filter(ar_id=app_id)
+                        settlementDate_format = datetime.strptime(settle_info.get('SettlementDate'), "%Y-%m-%d")
+                        contractDate_format = datetime.strptime(settle_info.get('ContractDate'), "%Y-%m-%d")
+                        if len(settle_obj)>0:
+                            settle_obj.update(settlementDate=settlementDate_format,
+                                                         contractDate=contractDate_format)
+                            print('Model: Settle update success, id: ', settle_obj[0].ar_id)
+                        else:
+                            settle = Live.objects.create(ar=app_obj[0],
+                                                         settlementDate=settlementDate_format,
+                                                         contractDate=contractDate_format)
+                            print('Model: Settle rebuild success, id: ', settle.ar_id)
+                    elif i.get('type') == 'reward':
+                        reward_info = i.get('data')
+                        reward_obj = Reward.objects.filter(ar_id=app_id)
+                        if len(reward_obj)>0:
+                            reward_obj.update(AD=reward_info.get('AD'),
+                                                agencyFee=reward_info.get('AgencyFee'),
+                                                backFee=reward_info.get('BackFee'))
+                            print('Model: Reward update success, id: ', reward_obj[0].ar_id)
+                        else:
+                            reward = Reward.objects.create(ar=app_obj[0],
+                                                       AD=reward_info.get('AD'),
+                                                       agencyFee=reward_info.get('AgencyFee'),
+                                                       backFee=reward_info.get('BackFee'))
+                            print('Model: Reward rebuild success, id: ', reward.ar_id)
+                    elif i.get('type') == 'tip':
+                        tip_info = i.get('data')
+                        tip_obj = Tip.objects.filter(ar_id=app_id)
+                        if len(tip_obj)>0:
+                            tip_obj.update(tip=tip_info.get('tip'))
+                            print('Model: Tip update success, id: ', tip_obj[0].ar_id)
+                        else:
+                            tip = Tip.objects.create(ar=app_obj[0],
+                                                     tip=tip_info.get('tip'))
+                            print('Model: Tip rebuild success, id: ', tip.ar_id)
+                app_obj.update(updater=usernameUser.username,
+                               lastUpdate=timezone.now())
+                res = {'res_code': 3122, 'res_msg': 'update_app_resp', 'res_data': 'update app success'}
+            else:
+                raise NoMatchingAppException('Loc: update_app(). app sskt num: ', sskt_num)
+        else:
+            res = {'res_code': 3122, 'res_msg': 'update_app_resp', 'res_data': 'update app success'}
+    except Exception as e:
+        print('Log: update application info, error: ')
+        traceback.print_exc()
+        res = {'res_code': 3122, 'res_msg': 'update_app_resp', 'res_data': 'update app fail'}
+    finally:
+        return JsonResponse(res)
+
 
 @csrf_exempt
 @login_required
@@ -918,7 +1061,7 @@ def maincontent_info(request):
             for i in app_objs:
                 print('username: ', i.seller.username)
                 if i.seller.username in has_name:
-                    working_flag('fun!!!', '1')
+                    # working_flag('fun!!!', '1')
                     index = has_name.index(i.seller.username)
                     item = res_data[index]
                     item['number'] += 1
@@ -929,7 +1072,7 @@ def maincontent_info(request):
                     else:
                         item['money'] += 0
                 else:
-                    working_flag('fun!!!', '2')
+                    # working_flag('fun!!!', '2')
                     has_name.append(i.seller.username)
                     item = copy.deepcopy(rank_temp)
                     item['username'] = i.seller.username

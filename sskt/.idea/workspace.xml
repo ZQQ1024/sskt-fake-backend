@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/backend/views.py" line="438" />
+    <bookmark url="file://$PROJECT_DIR$/backend/views.py" line="581" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed80438e-dedd-415c-9ffb-96c41792d57c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/custom_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/custom_exception.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sskt/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/sskt/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sskt/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/sskt/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,23 +28,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="18" />
+          <entry key="py" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="18" />
+          <entry key="Python" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="28" />
-          <entry key="py" value="14530" />
+          <entry key="py" value="15511" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="14558" />
+          <entry key="Python" value="15539" />
         </counts>
       </usages-collector>
     </session>
@@ -63,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sskt/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="35" column="35" lean-forward="true" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+            <state relative-caret-position="349">
+              <caret line="49" column="25" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="25" />
               <folding>
                 <element signature="e#628#660#0" expanded="true" />
               </folding>
@@ -84,14 +75,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="299" column="58" selection-start-line="299" selection-start-column="58" selection-end-line="299" selection-end-column="58" />
+            <state relative-caret-position="187">
+              <caret line="296" column="56" selection-start-line="296" selection-start-column="56" selection-end-line="296" selection-end-column="56" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <marker date="1564913743984" expanded="true" signature="1291:1304" ph="..." />
-                <marker date="1564913743984" expanded="true" signature="2888:2890" ph="..." />
-                <marker date="1564913743984" expanded="true" signature="5132:5266" ph="..." />
-                <marker date="1564913743984" expanded="true" signature="47735:47740" ph="..." />
+                <element signature="e#6550#7240#0" />
+                <element signature="e#5073#5084#0" />
+                <element signature="e#5528#5536#0" />
+                <element signature="e#5768#9825#0" />
+                <element signature="e#9614#9825#0" />
+                <marker date="1564930752203" expanded="true" signature="1291:1304" ph="..." />
+                <marker date="1564930752203" expanded="true" signature="2888:2890" ph="..." />
+                <marker date="1564930752203" expanded="true" signature="5237:15810" ph="..." />
+                <marker date="1564930752203" expanded="true" signature="58283:58288" ph="..." />
               </folding>
             </state>
           </provider>
@@ -179,7 +175,10 @@
       <find>maincontent</find>
       <find>commit</find>
       <find>request.body.decode('utf-8')</find>
+      <find>NoMatchingAppException</find>
+      <find>check</find>
       <find>comment</find>
+      <find>res</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -330,13 +329,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2139">
-          <caret line="94" column="7" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/custom_exception.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="473">
@@ -358,10 +350,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2139">
+          <caret line="94" column="7" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sskt/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="35" column="35" lean-forward="true" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+        <state relative-caret-position="349">
+          <caret line="49" column="25" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="25" />
           <folding>
             <element signature="e#628#660#0" expanded="true" />
           </folding>
@@ -370,14 +369,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="299" column="58" selection-start-line="299" selection-start-column="58" selection-end-line="299" selection-end-column="58" />
+        <state relative-caret-position="187">
+          <caret line="296" column="56" selection-start-line="296" selection-start-column="56" selection-end-line="296" selection-end-column="56" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <marker date="1564913743984" expanded="true" signature="1291:1304" ph="..." />
-            <marker date="1564913743984" expanded="true" signature="2888:2890" ph="..." />
-            <marker date="1564913743984" expanded="true" signature="5132:5266" ph="..." />
-            <marker date="1564913743984" expanded="true" signature="47735:47740" ph="..." />
+            <element signature="e#6550#7240#0" />
+            <element signature="e#5073#5084#0" />
+            <element signature="e#5528#5536#0" />
+            <element signature="e#5768#9825#0" />
+            <element signature="e#9614#9825#0" />
+            <marker date="1564930752203" expanded="true" signature="1291:1304" ph="..." />
+            <marker date="1564930752203" expanded="true" signature="2888:2890" ph="..." />
+            <marker date="1564930752203" expanded="true" signature="5237:15810" ph="..." />
+            <marker date="1564930752203" expanded="true" signature="58283:58288" ph="..." />
           </folding>
         </state>
       </provider>
