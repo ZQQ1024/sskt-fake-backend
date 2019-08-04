@@ -10,12 +10,13 @@ from django.utils import timezone
 from datetime import datetime
 from .custom_exception import NullResultQueryException, NoneUploadfileException, UploadfileExistedException,\
     NoMatchingAppException, ConfirmCommentFailException, UserGroupErrorException, GroupErrorException,\
-    AddGroupErrorException, NameCollecErrorException
+    AddGroupErrorException, NameCollecErrorException, ApplicationInfoErrorException
 from .tools import cus_quick_sort
 import os
 import copy
 import traceback
 import json
+import re
 
 # Create your views here.
 
@@ -31,8 +32,22 @@ def hello(request):
         pass
     return HttpResponse("zqq")
 
+def add_flag(flag_string_list):
+    pass
+
+
+
 @csrf_exempt
 def login(request):
+    # dire = request.body.decode('utf-8')
+    # new_dire = {}
+    # key_list = []
+    # value_list = []
+    # for i in dire.keys():
+    #     key_list.append(i)
+    # for i in dire.values():
+    #     value_list.append(i)
+
 
     res_dic = json.loads(request.body.decode('utf-8'))
     print(res_dic)
@@ -75,19 +90,96 @@ def csrf(request):
 def working_flag(string, flag='starting'):
     print('--------', string, ', ', flag, '.--------')
 
+def form2json(content):
+    # print('content: ', content, ', type: ', type(content))
+
+    userFilter = r'User[\S]+'
+    userTemp = {"type": "renter",
+            "data": {}}
+    managerFilter = r'ManagerCompany[\S]+'
+    managerTemp = {"type": "manager",
+            "data": {}}
+    thingFilter = r'Thing[\S]+'
+    thingTemp = {
+            "type": "thing",
+            "data": {}}
+    settleFilter = r'[\S]+Date'
+    settleTemp = {
+            "type": "settle",
+            "data": {}}
+    rewardFilter = r'(AD)|([\S]Fee)'
+    rewardTemp = {
+            "type": "reward",
+            "data": {}}
+    tipFilter = r'tip'
+    tipTemp = {
+            "type": "tip",
+            "data": {}}
+
+    for i in content:
+        if len(re.findall(userFilter, i)) > 0:
+            userTemp['data'].setdefault(i, content[i])
+        elif len(re.findall(managerFilter, i)) > 0:
+            managerTemp['data'].setdefault(i, content[i])
+        elif len(re.findall(thingFilter, i)) > 0:
+            thingTemp['data'].setdefault(i, content[i])
+        elif len(re.findall(settleFilter, i)) > 0:
+            settleTemp['data'].setdefault(i, content[i])
+        elif len(re.findall(rewardFilter, i)) > 0:
+            rewardTemp['data'].setdefault(i, content[i])
+        elif len(re.findall(tipFilter, i)) > 0:
+            tipTemp['data'].setdefault(i, content[i])
+
+    temp_list = []
+    temp_list.append(userTemp)
+    temp_list.append(managerTemp)
+    temp_list.append(thingTemp)
+    temp_list.append(settleTemp)
+    temp_list.append(rewardTemp)
+    temp_list.append(tipTemp)
+    temp_dict = {'content': temp_list}
+    # print('form trans to dict: ', json.dumps(temp_dict))
+
+    return json.dumps(temp_dict)
+
+def check_appinfo(content):
+    try:
+        int(content.get('ThingArea'))
+        int(content.get('ThingStayPeopleNumber'))
+        datetime.strptime(content.get('ContractDate'), "%Y-%m-%d")
+        datetime.strptime(content.get('SettlementDate'), "%Y-%m-%d")
+    except Exception as e:
+        print('Log: Check application info error')
+        print(repr(e))
+        traceback.print_exc()
+        return False
+    else:
+        print('Log: Check application info success')
+        return True
+
+@csrf_exempt
+@login_required
+def update_app(request):
+    working_flag('Update app info', 'starting')
+    print('sskt num: ', request.POST.get('sskt_num'))
+
+    return HttpResponse(200)
+
 @csrf_exempt
 @login_required
 def commit_app(request):
     print('Log: commit application, start...')
     if request.method == 'POST':
         try:
+            if not check_appinfo(request.POST):
+                raise ApplicationInfoErrorException('Check app info fail')
             # 查找当前登录用户姓名
             loginedUserId = request.session.get('_auth_user_id')
             usernameUser = User.objects.get(id=loginedUserId)
             print('Logined user: ', usernameUser, ', type', type(usernameUser))
             # 获取申请表中的信息
-            content_result = request.POST.get('content')
-            print('Get form data success')
+            # content_result = request.POST.get('content')
+            # print('Get form data success')
 
             #添加申请记录的基本信息
             app_record = ApplicationRecord.objects.create(seller=usernameUser,
@@ -98,9 +190,11 @@ def commit_app(request):
             ApplicationRecord.objects.filter(id=app_record.id).update(manager_number='-'.join(['sskt', str(app_record.id)]))
 
             #查找信息并提交
-            json_request_data = request.body
-            content = json.loads(json_request_data)
+            # json_request_data = request.body
+            content_json = form2json(request.POST)
+            content = json.loads(content_json)
             content_data = content.get('content')
+            # print(content_data)
             for i in content_data:
                 print('content type: ', i.get('type'))
                 if i.get('type') == 'renter':
@@ -140,8 +234,8 @@ def commit_app(request):
                     print('Model: Thing save success, id: ', thing.ar_id)
                 elif i.get('type') == 'settle':
                     settle_info = i.get('data')
-                    settlementDate_format = datetime.strptime(settle_info.get('SettlementDate'), "%Y-%m-%d %H:%M:%S")
-                    contractDate_format = datetime.strptime(settle_info.get('ContractDate'), "%Y-%m-%d %H:%M:%S")
+                    settlementDate_format = datetime.strptime(settle_info.get('SettlementDate'), "%Y-%m-%d")
+                    contractDate_format = datetime.strptime(settle_info.get('ContractDate'), "%Y-%m-%d")
                     settle = Live.objects.create(ar=app_record,
                                      settlementDate=settlementDate_format,
                                      contractDate=contractDate_format)
@@ -161,8 +255,9 @@ def commit_app(request):
             res = {'res_code': 312, 'res_msg': 'commit_app_resp', 'res_data': 'Commit Success'}
             print('Log: commit application, end.')
         except Exception as e:
-            print('Log: commit application, error: ', repr(e))
-            res = {'res_code': 312, 'res_msg': 'commit_app_resp', 'res_data': repr(e)}
+            print('Log: commit application, error: ')
+            traceback.print_exc()
+            res = {'res_code': 312, 'res_msg': 'commit_app_resp', 'res_data': 'commit app fail'}
         finally:
             return JsonResponse(res)
     else:
@@ -180,7 +275,8 @@ def commit_comment_msg(request):
             usernameUser = User.objects.get(id=loginedUserId)
             print('Logined user: ', usernameUser, ', type', type(usernameUser))
 
-            content_result = request.body
+            content_result = request.body.decode('utf-8')
+            # print(content_result)
             content = json.loads(content_result)
             print('Load data from json, content: ', content)
             sskt_num = content.get('sskt_num')
@@ -193,14 +289,24 @@ def commit_comment_msg(request):
                                                     updatePerson=usernameUser.username,
                                                     content=comment_content)
                 print('Model: Comment save success, id: ', comment_obj.ar_id)
-                res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': 'Commit Success'}
+
+                res_item = {}
+                res_item.setdefault('Comment_id', comment_obj.id)
+                res_item.setdefault('CreatePerson', comment_obj.createPerson)
+                res_item.setdefault('CreateDate', comment_obj.createDate)
+                res_item.setdefault('UpdatePerson', comment_obj.updatePerson)
+                res_item.setdefault('UpdateDate', comment_obj.updateDate)
+                res_item.setdefault('Status', comment_obj.status)
+                res_item.setdefault('Content', comment_obj.content)
+                res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': 'Commit Success', 'res_data': res_item}
             else:
                 print('Model: Comment save failed, Application info not exist, sskt: ', sskt_num)
         else:
             res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': 'Needing login'}
     except Exception as e:
         print('Log: commit comment, error: ', repr(e))
-        res = {'res_code': 314, 'res_msg': 'commit_comment_resp', 'res_data': repr(e)}
+        traceback.print_exc()
+        res = {'res_code': 314, 'res_msg': 'commit_comment_resp'}
     finally:
         return JsonResponse(res)
 
@@ -446,7 +552,7 @@ def confirm_comment(request):
 def app_info_detail(request):
     print('--------Searching app info detail, start.--------')
     try:
-        res_data = []
+        res_data = {}
         sskt_num = request.GET.get('sskt_num')
         app_res = ApplicationRecord.objects.filter(manager_number=sskt_num)
         if len(app_res) != 0:
@@ -459,64 +565,108 @@ def app_info_detail(request):
                                            ' result not exist')
         else:
             # 添加SSKT番号
-            sskt_data = {'type': 'sskt_num',
-                        'data': {
-                            'sskt_num': sskt_num
-                        }}
-            res_data.append(sskt_data)
+            # sskt_data = {'type': 'sskt_num',
+            #             'data': {
+            #                 'sskt_num': sskt_num
+            #             }}
+            # res_data.append(sskt_data)
+            res_data.setdefault('sskt_num', sskt_num)
             print('sskt num info completed')
             # 查询租户信息
             renter_obj = Renter.objects.filter(ar_id=app_id)
             if len(renter_obj) != 0:
-                renter_data = {'type': 'renter',
-                               'data': {
+                # renter_data = {'type': 'renter',
+                #                'data': {
+                #                    'UserNameWrite': renter_obj[0].userNameWrite,
+                #                    'UserNameAlias': renter_obj[0].userNameAlias,
+                #                    'UserNameRead': renter_obj[0].userNameRead,
+                #                    'UserAddr': renter_obj[0].userAddr,
+                #                    'UserAddrPostCode': renter_obj[0].userAddrPostcode,
+                #                    'UserPhone': renter_obj[0].userPhone
+                #                }}
+                renter_data = {
                                    'UserNameWrite': renter_obj[0].userNameWrite,
                                    'UserNameAlias': renter_obj[0].userNameAlias,
                                    'UserNameRead': renter_obj[0].userNameRead,
                                    'UserAddr': renter_obj[0].userAddr,
                                    'UserAddrPostCode': renter_obj[0].userAddrPostcode,
                                    'UserPhone': renter_obj[0].userPhone
-                               }}
+                               }
             else:
-                renter_data = {'type': 'renter',
-                               'data': {
+                # renter_data = {'type': 'renter',
+                #                'data': {
+                #                    'UserNameWrite': 'Null',
+                #                    'UserNameAlias': 'Null',
+                #                    'UserNameRead': 'Null',
+                #                    'UserAddr': 'Null',
+                #                    'UserAddrPostCode': 'Null',
+                #                    'UserPhone': 'Null'
+                #                }}
+                renter_data = {
                                    'UserNameWrite': 'Null',
                                    'UserNameAlias': 'Null',
                                    'UserNameRead': 'Null',
                                    'UserAddr': 'Null',
                                    'UserAddrPostCode': 'Null',
                                    'UserPhone': 'Null'
-                               }}
-            res_data.append(renter_data)
+                               }
+            res_data.update(renter_data)
             print('renter info completed')
             # 查询管理公司信息
             manager_obj = Company.objects.filter(ar_id=app_id)
             if len(manager_obj) != 0:
+                # manager_data = {
+                #     'type': 'manager',
+                #     'data': {
+                #         'ManagerCompanyName': manager_obj[0].managerCompanyName,
+                #         'ManagerCompanyAddr': manager_obj[0].managerCompanyAddr,
+                #         'ManagerCompanyChargerName': manager_obj[0].managerCompanyChargerName,
+                #         'ManagerCompanyPhone': manager_obj[0].managerCompanyPhone
+                #     }}
                 manager_data = {
-                    'type': 'manager',
-                    'data': {
                         'ManagerCompanyName': manager_obj[0].managerCompanyName,
                         'ManagerCompanyAddr': manager_obj[0].managerCompanyAddr,
                         'ManagerCompanyChargerName': manager_obj[0].managerCompanyChargerName,
                         'ManagerCompanyPhone': manager_obj[0].managerCompanyPhone
-                    }}
+                    }
             else:
+                # manager_data = {
+                #     'type': 'manager',
+                #     'data': {
+                #         'ManagerCompanyName': 'Null',
+                #         'ManagerCompanyAddr': 'Null',
+                #         'ManagerCompanyChargerName': 'Null',
+                #         'ManagerCompanyPhone': 'Null'
+                #     }}
                 manager_data = {
-                    'type': 'manager',
-                    'data': {
                         'ManagerCompanyName': 'Null',
                         'ManagerCompanyAddr': 'Null',
                         'ManagerCompanyChargerName': 'Null',
                         'ManagerCompanyPhone': 'Null'
-                    }}
-            res_data.append(manager_data)
+                    }
+            res_data.update(manager_data)
             print('company info completed')
             # 查询物件信息
             thing_obj = House.objects.filter(ar_id=app_id)
             if len(thing_obj) != 0:
+                # thing_data = {
+                #     'type': 'thing',
+                #     'data': {
+                #         'ThingName': thing_obj[0].thingName,
+                #         'ThingNumber': thing_obj[0].thingNumber,
+                #         'ThingStructI': thing_obj[0].structI,
+                #         'ThingStructII': thing_obj[0].structII,
+                #         'ThingArea': str(thing_obj[0].thingArea),
+                #         'ThingStayPeopleNumber': str(thing_obj[0].stayPeopleNumber),
+                #         'ThingAddr': thing_obj[0].thingAddr,
+                #         'ThingAddrPostcode': thing_obj[0].thingAddrPostcode,
+                #         'ThingRentCost': thing_obj[0].thingRentCost,
+                #         'ThingManageCost': thing_obj[0].thingManageCost,
+                #         'ThingGiftCost': thing_obj[0].thingGiftCost,
+                #         'ThingDepositCost': thing_obj[0].thingDepositCost,
+                #         'ThingReliefCost': thing_obj[0].thingReliefCost
+                #     }}
                 thing_data = {
-                    'type': 'thing',
-                    'data': {
                         'ThingName': thing_obj[0].thingName,
                         'ThingNumber': thing_obj[0].thingNumber,
                         'ThingStructI': thing_obj[0].structI,
@@ -530,11 +680,26 @@ def app_info_detail(request):
                         'ThingGiftCost': thing_obj[0].thingGiftCost,
                         'ThingDepositCost': thing_obj[0].thingDepositCost,
                         'ThingReliefCost': thing_obj[0].thingReliefCost
-                    }}
+                    }
             else:
+                # thing_data = {
+                #     'type': 'thing',
+                #     'data': {
+                #         'ThingName': 'Null',
+                #         'ThingNumber': 'Null',
+                #         'ThingStructI': 'Null',
+                #         'ThingStructII': 'Null',
+                #         'ThingArea': 'Null',
+                #         'ThingStayPeopleNumber': 'Null',
+                #         'ThingAddr': 'Null',
+                #         'ThingAddrPostcode': 'Null',
+                #         'ThingRentCost': 'Null',
+                #         'ThingManageCost': 'Null',
+                #         'ThingGiftCost': 'Null',
+                #         'ThingDepositCost': 'Null',
+                #         'ThingReliefCost': 'Null',
+                #     }}
                 thing_data = {
-                    'type': 'thing',
-                    'data': {
                         'ThingName': 'Null',
                         'ThingNumber': 'Null',
                         'ThingStructI': 'Null',
@@ -548,62 +713,86 @@ def app_info_detail(request):
                         'ThingGiftCost': 'Null',
                         'ThingDepositCost': 'Null',
                         'ThingReliefCost': 'Null',
-                    }}
-            res_data.append(thing_data)
+                    }
+            res_data.update(thing_data)
             print('thing info completed')
             # 查询入住信息
             settle_obj = Live.objects.filter(ar_id=app_id)
             if len(settle_obj) != 0:
+                # settle_data = {
+                #     'type': 'settle',
+                #     'data': {
+                #         'SettlementDate': datetime.strftime(settle_obj[0].settlementDate, "%Y-%m-%d"),
+                #         'ContractDate': datetime.strftime(settle_obj[0].contractDate, "%Y-%m-%d")
+                # }}
                 settle_data = {
-                    'type': 'settle',
-                    'data': {
                         'SettlementDate': datetime.strftime(settle_obj[0].settlementDate, "%Y-%m-%d"),
                         'ContractDate': datetime.strftime(settle_obj[0].contractDate, "%Y-%m-%d")
-                }}
+                }
             else:
+                # settle_data = {
+                #     'type': 'settle',
+                #     'data': {
+                #         'SettlementDate': 'Null',
+                #         'ContractDate': 'Null'
+                #     }}
                 settle_data = {
-                    'type': 'settle',
-                    'data': {
                         'SettlementDate': 'Null',
                         'ContractDate': 'Null'
-                    }}
-            res_data.append(thing_data)
+                    }
+            res_data.update(settle_data)
             print('settle info completed')
             # 查询报酬信息
             reward_obj = Reward.objects.filter(ar_id=app_id)
             if len(reward_obj) != 0:
+                # reward_data = {
+                #     'type': 'reward',
+                #     'data': {
+                #         'AD': reward_obj[0].AD,
+                #         'AgencyFee': reward_obj[0].agencyFee,
+                #         'BackFee': reward_obj[0].backFee,
+                # }}
                 reward_data = {
-                    'type': 'reward',
-                    'data': {
                         'AD': reward_obj[0].AD,
                         'AgencyFee': reward_obj[0].agencyFee,
                         'BackFee': reward_obj[0].backFee,
-                }}
+                }
             else:
+                # reward_data = {
+                #     'type': 'reward',
+                #     'data': {
+                #         'AD': 'Null',
+                #         'AgencyFee': 'Null',
+                #         'BackFee': 'Null'
+                #     }}
                 reward_data = {
-                    'type': 'reward',
-                    'data': {
                         'AD': 'Null',
                         'AgencyFee': 'Null',
                         'BackFee': 'Null'
-                    }}
-            res_data.append(reward_data)
+                    }
+            res_data.update(reward_data)
             print('reward info completed')
             # 查询备注信息
             tip_obj = Tip.objects.filter(ar_id=app_id)
             if len(tip_obj) != 0:
+                # tip_data = {
+                #     'type': 'tip',
+                #     'data': {
+                #         'tip': tip_obj[0].tip
+                # }}
                 tip_data = {
-                    'type': 'tip',
-                    'data': {
                         'tip': tip_obj[0].tip
-                }}
+                }
             else:
+                # tip_data = {
+                #     'type': 'tip',
+                #     'data': {
+                #         'tip': 'Null'
+                # }}
                 tip_data = {
-                    'type': 'tip',
-                    'data': {
                         'tip': 'Null'
-                }}
-            res_data.append(tip_data)
+                }
+            res_data.update(tip_data)
             print('tip info completed')
 
     except Exception as e:
@@ -612,7 +801,7 @@ def app_info_detail(request):
         print('--------Searching app info detail, end.--------')
         return JsonResponse(res)
     finally:
-        res = {'content': res_data}
+        res = res_data
         print('--------Searching app info detail, end.--------')
         return JsonResponse(res)
 
@@ -693,10 +882,15 @@ def doc(request):
         print('end making file content dict')
         for j in file_content:
             file_temp = {}
+            file_string_temp = []
             app_obj = ApplicationRecord.objects.filter(id=j)
             if len(app_obj) > 0:
                 file_temp['SSKT_number'] = app_obj[0].manager_number
-                file_temp['file_string'] = file_content[j]
+                print(file_content[j])
+                for i in file_content[j]:
+                    file_string_temp.append(i)
+                file_temp['file_string'] = file_string_temp
+                # file_temp['file_string'] = file_content[j]
             else:
                 file_temp['SSKT_number'] = 'Unknown'
                 file_temp['file_string'] = file_content[j]
@@ -706,7 +900,7 @@ def doc(request):
         print('Doc error: ', repr(e))
         print('--------Doc error.--------')
     finally:
-        print(res_data)
+        # print(res_data)
         res = {'content': res_data}
         print('--------Doc, end.--------')
         return JsonResponse(res)
@@ -816,7 +1010,7 @@ def permission_add_group(request):
     try:
         if request.method == 'POST':
             content = json.loads(request.body)
-            group_name = content.get('name')
+            group_name = content.get('group_name')
 
             group_object = Group.objects.filter(name=group_name)
             if len(group_object) > 0:
@@ -842,8 +1036,8 @@ def permission_addgroup_leader(request):
     try:
         if request.method == 'POST':
             content = json.loads(request.body)
-            group_name = content.get('name')
-            leader_name = content.get('leader')
+            group_name = content.get('group_name')
+            leader_name = content.get('leader_username')
 
             user_obj = User.objects.filter(username=leader_name)
             group_object = Group.objects.filter(name=group_name)

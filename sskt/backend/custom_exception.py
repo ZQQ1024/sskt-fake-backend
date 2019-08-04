@@ -72,3 +72,11 @@ class NameCollecErrorException(Exception):
 
     def __str__(self):
         return self.ErrorInfo
+
+class ApplicationInfoErrorException(Exception):
+    def __init__(self, ErrorInfo):
+        super().__init__(self)
+        self.ErrorInfo = '  '.join(['Application info error.', ErrorInfo])
+
+    def __str__(self):
+        return self.ErrorInfo

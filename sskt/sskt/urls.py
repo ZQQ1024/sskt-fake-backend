@@ -47,4 +47,5 @@ urlpatterns = [
     path('permission_add_group_leader/', views.permission_addgroup_leader),
     path('index/', views.index),
     path('login_page/', views.login_page),
+    path('app_info_update/', views.update_app),
 ]

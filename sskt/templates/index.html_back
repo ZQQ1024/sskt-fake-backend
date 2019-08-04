@@ -9,12 +9,6 @@
 		<script type="text/javascript" src="/static/js/jquery-3.1.1.min.js" ></script>
 		<script type="text/javascript" src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="/static/js/main.js" ></script>
-		<!--<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/main.css" />
-		<link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
-		<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
-		<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js" ></script>
-		<script type="text/javascript" src="js/main.js" ></script>-->
 	</head>
 	<body>
 		<nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0;background-color:#3C8DBC ;">
@@ -343,8 +337,8 @@
 											</thead>
 											<tbody id="table-41">
 											   
-											   
-											   	<tr>
+											    <!--</tr>
+											   	 <tr>
 												    <td>sstk-3258</td>
 												    <td>xxxxxxxxxxxxxxxxxx</td>
 												    <td>16516516516</td>
@@ -362,7 +356,7 @@
 		    											<button class="btn btn-primary btn-xs btnLL">联络</button>
 												    </td>
 											    </tr>
-											    <!--<tr>
+											    <tr>
 												    <td>sstk-3258</td>
 												    <td>xxxxxxxxxxxxxxxxxx</td>
 												    <td>16516516516</td>
@@ -685,139 +679,111 @@
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">契约者</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addName1" style="width: 650px;float: right;margin-right: 360px;" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName2" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名字假名</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName3" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名字拼音</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName4" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">当前详细地址</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">电话</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName5" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">当前邮政编码</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">座机电话</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName6" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">电话号码</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">地址</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">贷主情报（管理会社）</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addMan1" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司名称</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMan2" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司地址</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMan3" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司负责人名称</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社担当者名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMan4" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司电话号码</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社电话</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">物件情报</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addThing1" style="width: 650px;float: right;margin-right: 360px;" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">物件名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing2" style="width: 650px;float: right;margin-right: 360px;" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">号室</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing3" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构1</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing4" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构2</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing5" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">面积</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing6" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入住人数</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing7" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">所在地详细地址</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing8" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">所在地邮政编码</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing9" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">租金（每月）</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing10" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理费用（每月）</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing11" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">礼金</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing12" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">敷金</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing13" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">保证金</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">入契日情报</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addTime1" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入住日</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入局日</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addTime2" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">合同日</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">契约日</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">报酬</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addMony1" style="width: 650px;float: right;margin-right: 360px;" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMony2" style="width: 650px;float: right;margin-right: 360px;" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">中介费</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD（事务所）</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMony3" style="width: 650px;float: right;margin-right: 360px;" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金（事务所）</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金</p>
 			    					</div>
-			    				</div>
-			    				<div class="row" style="margin: 0;margin-top: 20px;">
-			    					<h4 style="margin-left:58px;">备注</h4>
-			    					<div class="row" style="margin: 0;">
-			    						<textarea id="addBei" style="width: 650px;float: right;margin-right: 360px;height: 100px;resize: none;" /></textarea>
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">备注</p>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" />
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金（事务所）</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
-			    					<h4 style="margin-left:58px ;">文档</h4>
+			    					<h4 style="margin-left:58px;">备考</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<textarea style="width: 650px;float: right;margin-right: 360px;height: 100px;resize: none;" /></textarea>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">追加</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px ;">文什么XXXXXXXXX</h4>
 					    			<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;position: relative;">
 						    			<p style="margin: 0;margin-left: 54px;font-size: 16px;font-weight: bold;">选择文档</p>
 						    			<select style="margin-left: 40px;height: 32px;width: 100px;">
@@ -826,8 +792,8 @@
 						    			</select>
 						    			<input style="margin-left: 20px;height: 32px;width: 200px;" type="text" />
 						    			<label style="margin-bottom: 0;">
-						    				<input id="addFile" style="height: 32px;width: 75px;opacity: 0;float: left;" type="file" value="选择"/>
-						    				<img src="/static/img/2.png" style="float:left;margin-left: -75px;"/>
+						    				<input style="height: 32px;width: 75px;opacity: 0;float: left;" type="file" value="选择"/>
+						    				<img src="img/2.png" style="float:left;margin-left: -75px;"/>
 						    			</label>
 						    			<p style="margin:0;margin-left: 20px;font-weight: bold;">到</p>
 						    			<select style="margin-left: 20px;height: 32px;width: 120px;">
@@ -853,142 +819,137 @@
 			    					<h4 style="margin-left:20px ;float: left;">照会</h4>
 			    					<button class="btn btn-warning" style="float: right;margin-top: 10px;margin-right: 20px;" id="changeTxt">修正</button>
 			    				</div>
-			    				<div class="xiuz"></div>
-			    				<!--<div class="row" style="margin: 0;margin-top: 20px;">
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">契约者</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addName1a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName2a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名字假名</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName3a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名字拼音</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName4a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">当前详细地址</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">电话</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName5a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">当前邮政编码</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">座机电话</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName6a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">电话号码</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">地址</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">贷主情报（管理会社）</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addMan1a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司名称</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMan2a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司地址</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMan3a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司负责人名称</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社担当者名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMan4a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司电话号码</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社电话</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">物件情报</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addThing1a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">物件名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing2a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">号室</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing3a" style="width: 650px;float: right;margin-right: 360px;"  disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构1</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing4a" style="width: 650px;float: right;margin-right: 360px;"  disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构2</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing5a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">面积</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing6a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入住人数</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing7a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">所在地详细地址</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing8a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">所在地邮政编码</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing9a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">租金（每月）</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing10a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理费用（每月）</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing11a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">礼金</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing12a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">敷金</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing13a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">保证金</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">入契日情报</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addTime1a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入住日</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入局日</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addTime2a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">合同日</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">契约日</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">报酬</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addMony1a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMony2a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">中介费</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD（事务所）</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMony3a" style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金（事务所）</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金（事务所）</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">备考</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<textarea style="width: 650px;float: right;margin-right: 360px;height: 100px;resize: none;" disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/></textarea>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">追加</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;margin-bottom: 20px;">
-			    					<h4 style="margin-left:58px;">备注</h4>
-			    					<div class="row" style="margin: 0;">
-			    						<textarea id="addBeia" style="width: 650px;float: right;margin-right: 360px;height: 100px;resize: none;"  disabled="disabled" placeholder="啊啊啊啊啊啊啊啊"/></textarea>
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">备注</p>
-			    					</div>
+			    					<h4 style="margin-left:58px ;">文什么XXXXXXXXX</h4>
+					    			<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;position: relative;">
+						    			<p style="margin: 0;margin-left: 54px;font-size: 16px;font-weight: bold;">选择文档</p>
+						    			<select style="margin-left: 40px;height: 32px;width: 100px;" disabled="true">
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<input style="margin-left: 20px;height: 32px;width: 200px;" type="text" disabled="disabled" placeholder="C：xsax/s"/>
+						    			<label style="margin-bottom: 0;">
+						    				<input style="height: 32px;width: 75px;opacity: 0;float: left;" type="file" value="选择" disabled="disabled"/>
+						    				<img src="img/2.png" style="float:left;margin-left: -75px;"/>
+						    			</label>
+						    			<p style="margin:0;margin-left: 20px;font-weight: bold;">到</p>
+						    			<select style="margin-left: 20px;height: 32px;width: 120px;" disabled="true">
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<button class="btn" style="background-color:#F39C12;margin-left: 40px;">追加</button>
+						    		</div>
 			    				</div>
-					    		<button type="button" class="btn btn-default buttonLX" id="lianXi1">联系</button>-->
+			    				<!--<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;margin-top: 20px;margin-bottom: 20px;">
+					    			<button class="btn" style="background-color:#00BBE9;margin-left: 40px;">提交申请</button>
+					    		</div>-->
+					    		<button type="button" class="btn btn-default buttonLX" id="lianXi1">联系</button>
 			    			</div>
 			    		</div>
 		   			</div>
@@ -999,147 +960,137 @@
 			    		<div class="row" style="margin: 0;margin-top: 20px;overflow-x: hidden;overflow-y: scroll;">
 			    			<div class="row" style="margin: 0;margin-left: 25px;border: 1px solid #CCCCCC;margin-right: 20px;position: relative;">
 			    				<h4 style="margin-left:20px ;">照会修改</h4>
-			    				<div class="xiuG">
-			    					<p class="display"></p>
-			    				</div>
-			    				<!--<div class="row" style="margin: 0;margin-top: 20px;">
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">契约者</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addName1c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName2c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名字假名</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">姓</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName3c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名字拼音</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName4c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">当前详细地址</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">电话</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName5c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">当前邮政编码</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">座机电话</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addName6c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">电话号码</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">地址</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">贷主情报（管理会社）</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addMan1c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司名称</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMan2c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司地址</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMan3c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司负责人名称</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社担当者名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMan4c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理公司电话号码</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理会社电话</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">物件情报</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addThing1c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊"/>
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">物件名</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing2c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">号室</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing3c" style="width: 650px;float: right;margin-right: 360px;"   placeholder="啊啊啊啊啊啊啊啊"/>
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构1</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing4c" style="width: 650px;float: right;margin-right: 360px;"   placeholder="啊啊啊啊啊啊啊啊"/>
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构2</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing5c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">面积</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing6c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入住人数</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing7c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">所在地详细地址</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing8c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">所在地邮政编码</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing9c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">租金（每月）</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing10c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">管理费用（每月）</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing11c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">礼金</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing12c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">敷金</p>
-			    					</div>
-			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addThing13c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">保证金</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">结构</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">入契日情报</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addTime1c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入住日</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入局日</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addTime2c" style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">合同日</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">契约日</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;">
 			    					<h4 style="margin-left:58px;">报酬</h4>
 			    					<div class="row" style="margin: 0;">
-			    						<input id="addMony1c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMony2c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">中介费</p>
+			    						<input style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">AD（事务所）</p>
 			    					</div>
 			    					<div class="row" style="margin: 0;margin-top: 20px;">
-			    						<input id="addMony3c" style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊" />
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;" placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">现金（事务所）</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
 			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金</p>
+			    					</div>
+			    					<div class="row" style="margin: 0;margin-top: 20px;">
+			    						<input style="width: 650px;float: right;margin-right: 360px;"  placeholder="啊啊啊啊啊啊啊啊"/>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">返金（事务所）</p>
+			    					</div>
+			    				</div>
+			    				<div class="row" style="margin: 0;margin-top: 20px;">
+			    					<h4 style="margin-left:58px;">备考</h4>
+			    					<div class="row" style="margin: 0;">
+			    						<textarea style="width: 650px;float: right;margin-right: 360px;height: 100px;resize: none;" placeholder="啊啊啊啊啊啊啊啊"/></textarea>
+			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">追加</p>
 			    					</div>
 			    				</div>
 			    				<div class="row" style="margin: 0;margin-top: 20px;margin-bottom: 20px;">
-			    					<h4 style="margin-left:58px;">备注</h4>
-			    					<div class="row" style="margin: 0;">
-			    						<textarea id="addBeic" style="width: 650px;float: right;margin-right: 360px;height: 100px;resize: none;"  placeholder="啊啊啊啊啊啊啊啊"/></textarea>
-			    						<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">备注</p>
-			    					</div>
-			    				</div>-->
+			    					<h4 style="margin-left:58px ;">文什么XXXXXXXXX</h4>
+					    			<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;position: relative;">
+						    			<p style="margin: 0;margin-left: 54px;font-size: 16px;font-weight: bold;">选择文档</p>
+						    			<select style="margin-left: 40px;height: 32px;width: 100px;" >
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<input style="margin-left: 20px;height: 32px;width: 200px;" type="text"placeholder="C：xsax/s"/>
+						    			<label style="margin-bottom: 0;">
+						    				<input style="height: 32px;width: 75px;opacity: 0;float: left;" type="file" value="选择"/>
+						    				<img src="img/2.png" style="float:left;margin-left: -75px;"/>
+						    			</label>
+						    			<p style="margin:0;margin-left: 20px;font-weight: bold;">到</p>
+						    			<select style="margin-left: 20px;height: 32px;width: 120px;" >
+						    				<option>申达书</option>
+						    				<option>申达书</option>
+						    			</select>
+						    			<button class="btn" style="background-color:#F39C12;margin-left: 40px;">追加</button>
+						    		</div>
+			    				</div>
 			    				<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;margin-top: 20px;margin-bottom: 20px;">
-					    			<button id="changgeS" class="btn" style="background-color:#00BBE9;margin-left: 40px;">确认修改</button>
+					    			<button class="btn" style="background-color:#00BBE9;margin-left: 40px;">确认修改</button>
 					    		</div>
-					    		<!--<button type="button" class="btn btn-default buttonLX" id="lianXi2">联系</button>-->
+					    		<button type="button" class="btn btn-default buttonLX" id="lianXi2">联系</button>
 			    			</div>
 			    		</div>
 		   			</div>
@@ -1166,8 +1117,8 @@
 												    <th>操作</th>
 											    </tr>
 											</thead>
-											<tbody id="table-31">
-											    <!--<tr>
+											<tbody>
+											    <tr>
 												    <td style="width: 400px;">啊啊啊啊啊啊啊啊啊啊啊奥奥奥奥奥奥奥奥奥aaaaaaaaaaaaaaaaaaa奥奥所所所所所所所所所所所所所所所撒</td>
 												    <td>付晓瑞</td>
 												    <td>2019-03-11 10:44:15</td>
@@ -1270,16 +1221,16 @@
 												    <td>付晓瑞</td>
 												    <td>2019-03-11 10:44:15</td>
 												    <td><button class="btn">完成</button></td>
-											    </tr>-->
+											    </tr>
 											    
 											</tbody>
 			    						</table>
 			    						<div class="row" style="margin: 0;margin-top: 20px;">
 			    							<p style="font-weight: bold;margin-left: 8px;">联络事项追加</p>
-			    							<textarea id="addChat" style="width: 960px;height: 100px;resize: none;margin-left: 8px;"></textarea>
+			    							<textarea style="width: 960px;height: 100px;resize: none;margin-left: 8px;"></textarea>
 			    						</div>
 			    						<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;margin-top: 20px;margin-bottom: 20px;">
-							    			<button id="addChatBtn" class="btn" style="background-color:#00BBE9;margin-left: 40px;">追加</button>
+							    			<button class="btn" style="background-color:#00BBE9;margin-left: 40px;">追加</button>
 							    		</div>
 			    					</div>
 		    						<div class="col-lg-1">
@@ -1310,7 +1261,7 @@
 						    			<input style="margin-left: 20px;height: 32px;width: 400px;" type="text" />
 						    			<label style="margin-bottom: 0;">
 						    				<input style="height: 32px;width: 75px;opacity: 0;float: left;" type="file" value="选择"/>
-						    				<img src="/static/img/2.png" style="float:left;margin-left: -75px;"/>
+						    				<img src="img/2.png" style="float:left;margin-left: -75px;"/>
 						    			</label>
 						    			<p style="margin:0;margin-left: 60px;">到</p>
 						    			<select style="margin-left: 20px;height: 32px;width: 250px;">
@@ -1329,13 +1280,7 @@
 		    					<button class="btn" style="background-color:#3C8DBC;margin-left: 40px;color: white;"><i class="fa fa-search"></i>&nbsp;检索</button>
 		    					<button class="btn" style="background-color:#F39C12;color: white;"><i class="fa fa-refresh"></i>&nbsp;重置</button>
 		    				</div>
-		    				<div id="fileAll" class="row" style="margin: 0;margin-top: 1px;height: 620px;background: white;border: 1px solid #CCCCCC;border-top: 1px solid #204D74;overflow-x: hidden;overflow-y: scroll;">
-		    					<!--<ul style="padding: 0;margin-top: 10px;">
-		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
-		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
-		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
-		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
-		    					</ul>
+		    				<div class="row" style="margin: 0;margin-top: 1px;height: 620px;background: white;border: 1px solid #CCCCCC;border-top: 1px solid #204D74;overflow-x: hidden;overflow-y: scroll;">
 		    					<ul style="padding: 0;margin-top: 10px;">
 		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
 		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
@@ -1395,7 +1340,13 @@
 		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
 		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
 		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
-		    					</ul>-->
+		    					</ul>
+		    					<ul style="padding: 0;margin-top: 10px;">
+		    						<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;社番：sskt-1865 山东看都是奇偶我按摩房东我案件佛我案件覅偶叫师傅及哦哦</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    						<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;奥斯卡美女空间的你们仨咖啡机哦你妹.AVI</li>
+		    					</ul>
 		    				</div>
 		    			</div>
 		    		</div>
