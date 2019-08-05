@@ -91,7 +91,7 @@ def working_flag(string, flag='starting'):
     print('--------', string, ', ', flag, '.--------')
 
 def form2json(content):
-    # print('content: ', content, ', type: ', type(content))
+    print('content: ', content, ', type: ', type(content))
 
     userFilter = r'User[\S]+'
     userTemp = {"type": "renter",
@@ -330,11 +330,15 @@ def commit_app(request):
             recorder=usernameUser.username,
             lastUpdate=timezone.now())
             print('Model: ApplicationRecord save success, id: ', app_record.id)
-            ApplicationRecord.objects.filter(id=app_record.id).update(manager_number='-'.join(['sskt', str(app_record.id)]))
+            sskt_num = '-'.join(['sskt', str(app_record.id)])
+            ApplicationRecord.objects.filter(id=app_record.id).update(manager_number=sskt_num)
 
             #查找信息并提交
             # json_request_data = request.body
             content_json = form2json(request.POST)
+            upFile = request.FILES.get('file', None)
+            # print(upFile, ' ', type(upFile), ' ', str(upFile))
+            commit_app_uploadfile(sskt_num, str(upFile), upFile)
             content = json.loads(content_json)
             content_data = content.get('content')
             # print(content_data)
@@ -948,14 +952,12 @@ def app_info_detail(request):
         print('--------Searching app info detail, end.--------')
         return JsonResponse(res)
 
-@csrf_exempt
-@login_required
-def commit_app_uploadfile(request):
+def commit_app_uploadfile(sskt_num, filename, file_data):
     print('--------Upload file, start.--------')
     try:
-        if request.method == 'POST':
+        # if request.method == 'POST':
             # 查询关联的申请记录
-            sskt_num = request.POST.get('sskt_num')
+            # sskt_num = request.POST.get('sskt_num')
             app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
             if len(app_obj) != 0:
                 app_id = app_obj[0].id
@@ -968,7 +970,7 @@ def commit_app_uploadfile(request):
 
             # 上传文件存储位置，不存在则新建
             up_path = './uploadfile'
-            filename = request.POST.get('file_name')
+            # filename = request.POST.get('file_name')
             up_path = up_path + '/' + app_obj[0].manager_number
             print('upload file absolute path: ', os.path.abspath(up_path))
             folder = os.path.exists(up_path)
@@ -987,7 +989,7 @@ def commit_app_uploadfile(request):
                                            path=up_name)
             print('Model: File save success. file id: ', file_obj.id)
 
-            file_data = request.FILES.get('upload_file', None)
+            # file_data = request.FILES.get('upload_file', None)
             if not file_data:
                 print('None upload file')
                 raise NoneUploadfileException('Loc: commit_app_uploadfile()')

@@ -35,7 +35,7 @@ urlpatterns = [
     path('applications_info/', views.applications_info),
     path('comment_info/', views.comment),
     path('applications_info_detail/', views.app_info_detail),
-    path('commit_app_apploadfile/', views.commit_app_uploadfile),
+    # path('commit_app_apploadfile/', views.commit_app_uploadfile),
     path('doc/', views.doc),
     path('quick_sort/', views.quick_sort_test),
     path('maincontent_info/', views.maincontent_info),
