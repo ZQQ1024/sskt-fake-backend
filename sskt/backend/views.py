@@ -512,8 +512,8 @@ def get_name_collec(username_str):
                 if len(usergroup__obj) > 0:
                     group_obj = Group.objects.filter(id=usergroup__obj[0].group)
                     if len(group_obj) > 0:
-                        print('user is group leader, group: ', group_obj[0].name)
                         if group_obj[0].leader == user_id:
+                            print('user is group leader, group: ', group_obj[0].name)
                             user_group_collec_obj = UserGroup.objects.all()
                             for j in user_group_collec_obj:
                                 if j.group == group_obj[0].id:
@@ -1135,7 +1135,7 @@ def permission_add_admin(request):
             else:
                 new_user_group_obj = UserAdmin.objects.create(
                                             user=usernameUser_obj[0],
-                                            is_admin=3)
+                                            is_admin=1)
         else:
             raise UserGroupErrorException('Loc: permission_add_admin(), submit method is not POST.')
     except Exception as e:
