@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -1238,6 +1238,43 @@ def permission_add_user_to_group(request):
         res = {'res_code': 513, 'res_msg': 'add user to group successed'}
         working_flag('permission_add_user_to_group', 'end')
         return JsonResponse(res)
+
+@csrf_exempt
+@login_required
+def file_download(request):
+    def file_iterator(filename, chunk_size=512):
+        try:
+            with open(filename, 'rb') as f:
+                while True:
+                    c = f.read(chunk_size)
+                    if c:
+                        yield c
+                    else:
+                        break
+        except Exception as e:
+            res = {'res_code': 515, 'res_msg': 'file download failed'}
+            traceback.print_exc()
+            working_flag('file_download', 'error')
+            return JsonResponse(res)
+
+    try:
+        working_flag('file_download', 'start')
+        if request.method == 'POST':
+            filename = request.POST.get('filename')
+            print(filename)
+            response = StreamingHttpResponse(file_iterator(filename))
+            response['Content-Type'] = 'application/octet-stream'
+            response['Content-Disposition'] = 'attachment;filename="{0}"'.format(filename)
+
+    except Exception as e:
+        res = {'res_code': 515, 'res_msg': 'file download failed'}
+        traceback.print_exc()
+        working_flag('file_download', 'error')
+        return JsonResponse(res)
+    else:
+        # res = {'res_code': 513, 'res_msg': 'file download successed'}
+        working_flag('file_download', 'end')
+        return response
 
 def index(request):
     return render(request, 'index.html')
