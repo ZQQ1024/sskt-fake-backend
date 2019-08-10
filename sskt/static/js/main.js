@@ -45,7 +45,7 @@ $(function(){
 		$(".talAll").addClass("display");
 		$(".tal-1").removeClass("display");
 		$.ajax({
-        type:"get", 
+       		type:"get", 
 	        url:"/maincontent_info/",
 	        async:true,
 	        timeout:50000,
@@ -843,9 +843,6 @@ $(function(){
 		$(".winTan").addClass("display");
 	})
 	
-	$("#logout").click(function(){
-		window.location.href = "login.html";
-	})
 	
 	var ulMainNum = 0;
 	$(document).on("click",".ulMain",function(){
@@ -1054,5 +1051,20 @@ $(function(){
 		        }
 	    	});
 		}
-	})
+	});
+	
+	//登出
+	
+	$("#logout").click(function(){
+		$.ajax({
+       		type:"POST", 
+	        url:"/logout/",
+	        async:true,
+	        timeout:50000,
+	        dataType:"JSON",
+	        success:function(data){
+	        	window.location.href="/login_page/";
+	        }
+	    });
+	});
 })

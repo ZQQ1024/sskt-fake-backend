@@ -1252,17 +1252,18 @@ def file_download(request):
                     else:
                         break
         except Exception as e:
-            res = {'res_code': 515, 'res_msg': 'file download failed'}
             traceback.print_exc()
-            working_flag('file_download', 'error')
-            return JsonResponse(res)
+            return None
 
     try:
         working_flag('file_download', 'start')
         if request.method == 'POST':
             filename = request.POST.get('filename')
             print(filename)
-            response = StreamingHttpResponse(file_iterator(filename))
+            iterator_obj = file_iterator(filename)
+            if iterator_obj is None:
+                raise FileNotFoundError
+            response = StreamingHttpResponse(iterator_obj)
             response['Content-Type'] = 'application/octet-stream'
             response['Content-Disposition'] = 'attachment;filename="{0}"'.format(filename)
 
