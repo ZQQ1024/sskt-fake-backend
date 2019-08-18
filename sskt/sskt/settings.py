@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'sskt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sskt',
+        'NAME': 'sskt_1',
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST': '127.0.0.1',

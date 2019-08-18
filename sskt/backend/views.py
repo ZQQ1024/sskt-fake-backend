@@ -142,6 +142,15 @@ def form2json(content):
 
     return json.dumps(temp_dict)
 
+def get_date_detail(str):
+    year = str.split('年')[0]
+    new_str = str.split('年')[1]
+    month = new_str.split('月')[0]
+    new_str = new_str.split('月')[1]
+    day = new_str.split('日')[0]
+
+    return '-'.join([year, month, day])
+
 def check_appinfo(content):
     try:
         int(content.get('ThingArea'))
@@ -149,8 +158,12 @@ def check_appinfo(content):
         int(content.get('AD'))
         int(content.get('AgencyFee'))
         int(content.get('BackFee'))
-        datetime.strptime(content.get('ContractDate'), "%Y-%m-%d")
-        datetime.strptime(content.get('SettlementDate'), "%Y-%m-%d")
+        ContractDate_str = content.get('ContractDate')
+        SettlementDate_str = content.get('SettlementDate')
+        ContractDate_str = get_date_detail(ContractDate_str)
+        SettlementDate_str = get_date_detail(SettlementDate_str)
+        datetime.strptime(ContractDate_str, "%Y-%m-%d")
+        datetime.strptime(SettlementDate_str, "%Y-%m-%d")
     except Exception as e:
         print('Log: Check application info error')
         print(repr(e))
@@ -258,8 +271,10 @@ def update_app(request):
                     elif i.get('type') == 'settle':
                         settle_info = i.get('data')
                         settle_obj = Live.objects.filter(ar_id=app_id)
-                        settlementDate_format = datetime.strptime(settle_info.get('SettlementDate'), "%Y-%m-%d")
-                        contractDate_format = datetime.strptime(settle_info.get('ContractDate'), "%Y-%m-%d")
+                        settle_settlement_str = get_date_detail(settle_info.get('SettlementDate'))
+                        settle_contract_str = get_date_detail(settle_info.get('ContractDate'))
+                        settlementDate_format = datetime.strptime(settle_settlement_str, "%Y-%m-%d")
+                        contractDate_format = datetime.strptime(settle_contract_str, "%Y-%m-%d")
                         if len(settle_obj)>0:
                             settle_obj.update(settlementDate=settlementDate_format,
                                                          contractDate=contractDate_format)
@@ -381,8 +396,10 @@ def commit_app(request):
                     print('Model: Thing save success, id: ', thing.ar_id)
                 elif i.get('type') == 'settle':
                     settle_info = i.get('data')
-                    settlementDate_format = datetime.strptime(settle_info.get('SettlementDate'), "%Y-%m-%d")
-                    contractDate_format = datetime.strptime(settle_info.get('ContractDate'), "%Y-%m-%d")
+                    settle_settlement_str = get_date_detail(settle_info.get('SettlementDate'))
+                    settle_contract_str = get_date_detail(settle_info.get('ContractDate'))
+                    settlementDate_format = datetime.strptime(settle_settlement_str, "%Y-%m-%d")
+                    contractDate_format = datetime.strptime(settle_contract_str, "%Y-%m-%d")
                     settle = Live.objects.create(ar=app_record,
                                      settlementDate=settlementDate_format,
                                      contractDate=contractDate_format)
@@ -671,9 +688,10 @@ def confirm_comment(request):
             json_content = request.body
             content = json.loads(json_content)
             comment_id = content.get('Comment_id')
+            print('comment_id: ', comment_id)
             comment_obj = Comment.objects.filter(id=comment_id)
             if len(comment_obj) > 0:
-                if comment_obj[0].status == 'Unchecked':
+                if comment_obj[0].status == 'unchecked':
                     comment_obj.update(status='Checked')
                 else:
                     error_str = 'Loc: confirm_comment(), comment status error, comment id: ' + str(comment_id) +\
@@ -969,7 +987,7 @@ def commit_app_uploadfile(sskt_num, filename, file_data):
                                                ' application failed')
 
             # 上传文件存储位置，不存在则新建
-            up_path = './uploadfile'
+            up_path = './static/uploadfile'
             # filename = request.POST.get('file_name')
             up_path = up_path + '/' + app_obj[0].manager_number
             print('upload file absolute path: ', os.path.abspath(up_path))
@@ -985,9 +1003,7 @@ def commit_app_uploadfile(sskt_num, filename, file_data):
                 print('uploadfile_fail, file exist')
                 raise UploadfileExistedException('Loc: commit_app_uploadfile(), upload file existed.')
 
-            file_obj = File.objects.create(ar=app_obj[0],
-                                           path=up_name)
-            print('Model: File save success. file id: ', file_obj.id)
+
 
             # file_data = request.FILES.get('upload_file', None)
             if not file_data:
@@ -997,6 +1013,9 @@ def commit_app_uploadfile(sskt_num, filename, file_data):
                 for chunk in file_data.chunks():
                     f.write(chunk)
                 print('Upload file over')
+
+            file_obj = File.objects.create(ar=app_obj[0], path=up_name)
+            print('Model: File save success. file id: ', file_obj.id)
 
     except Exception as e:
         print('Log: upload file fail, error: ', str(e))
@@ -1276,6 +1295,46 @@ def file_download(request):
         # res = {'res_code': 513, 'res_msg': 'file download successed'}
         working_flag('file_download', 'end')
         return response
+
+@csrf_exempt
+@login_required
+def get_all_ssktnum(request):
+    try:
+        res_data = []
+        working_flag('get_all_ssktnum', 'start')
+        app_objs = ApplicationRecord.objects.all()
+        ssktnum_list = []
+        for i in app_objs:
+            ssktnum_list.append(i.manager_number)
+        res_data = ssktnum_list
+    except Exception as err:
+        res = {'res': ''}
+        traceback.print_exc()
+        working_flag('get_all_ssktnum', 'error')
+        return JsonResponse(res)
+    else:
+        res = {'res': res_data}
+        working_flag('get_all_ssktnum', 'end')
+        return JsonResponse(res)
+
+
+@csrf_exempt
+@login_required
+def file_addto(request):
+    working_flag('file_addto', 'start')
+    try:
+        if request.method == 'POST':
+            file_ssktnum = request.POST.get('ssktnum')
+            upFile = request.FILES.get('file', None)
+            commit_app_uploadfile(file_ssktnum, str(upFile), upFile)
+    except Exception as e:
+        traceback.print_exc()
+        working_flag('file_addto', 'error')
+        return HttpResponse(400)
+    else:
+        working_flag('file_addto', 'end')
+        return HttpResponse(200)
+
 
 def index(request):
     return render(request, 'index.html')

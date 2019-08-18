@@ -3,7 +3,16 @@ $(function(){
 		return false; //即阻止默认行为也阻止冒泡
 	});
 	var person = sessionStorage.getItem("userId");
-	$("#person").html(person)
+	$("#person").html(person);
+	
+	var myDate = new Date();
+	//获取当前年
+	var year=myDate.getFullYear();
+	//获取当前月
+	var month=myDate.getMonth()+1;
+	$("#year").html(year);
+	$("#month").html(month);
+	
 	$.ajax({
         type:"get", 
         url:"/maincontent_info/",
@@ -172,8 +181,24 @@ $(function(){
 	    });
 	});
 	$("#main3").click(function(){
+		$("#fileAll").empty();
 		$(".main").addClass("display");
 		$(".main-3").removeClass("display");
+		$.ajax({
+	        type:"get", 
+	        url:"/get_all_ssktnum/",
+	        async:true,
+	        timeout:50000,
+	        dataType:"JSON",
+	        success:function(data){
+	        	data = data.res;
+	        	for(var i = 0;i<data.length;i++){
+	        		var html = '<option>'+data[i]+'</option>';
+	        		$("#allSskt").append(html);
+	        	}
+	        }
+    	});
+    	
 		$.ajax({
 	        type:"get", 
 	        url:"/doc/",
@@ -191,7 +216,7 @@ $(function(){
 	        		file_string = data[i].file_string;
 	        		var html1 = "";
 	        		for(var j = 0;j<file_string.length;j++){
-	        			html1 += '<li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;'+file_string[j]+'</li>';
+	        			html1 += '<a href="'+file_string[j]+'" download=""><li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;'+file_string[j]+'</li></a>';
 	        		}
 	        		html = '<ul style="padding: 0;margin-top: 10px;">'+
 	    						'<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;'+SSKTName+'</li>'+html1+
@@ -203,6 +228,53 @@ $(function(){
 	        }
     	});
 	});
+	//追加文件
+	$("#sendfile").click(function(){
+		var allSskt = $("#allSskt").val();
+		var formData = new FormData();
+		formData.append("ssktnum",allSskt);
+		formData.append("file",$("#addFile_1")[0].files[0]);
+		$.ajax({
+	        type:"POST", 
+	        url:"/file_addto/",
+	        data:formData,
+	        processData: false,
+   			contentType: false,
+	        timeout:50000,
+	        success:function(data){
+	        	$("#fileAll").empty();
+	        	$.ajax({
+			        type:"get", 
+			        url:"/doc/",
+			        async:true,
+			        timeout:50000,
+			        dataType:"JSON",
+			        success:function(data){
+			        	data = data.content;
+			        	console.log(data)
+			        	var SSKTName = "";
+			        	var file_string = "";
+			        	var html = "";
+			        	for(var i = 0;i<data.length;i++){
+			        		SSKTName = data[i].SSKT_number;
+			        		file_string = data[i].file_string;
+			        		var html1 = "";
+			        		for(var j = 0;j<file_string.length;j++){
+			        			html1 += '<a href="'+file_string[j]+'" download=""><li class="ulTips" style="margin-left: 60px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;'+file_string[j]+'</li></a>';
+			        		}
+			        		html = '<ul style="padding: 0;margin-top: 10px;">'+
+			    						'<li class="ulMain" style="margin-left: 20px;"><i class="fa fa-folder-open-o" style="color: #2AABD2;"></i>&nbsp;&nbsp;&nbsp;'+SSKTName+'</li>'+html1+
+			    					'</ul>';
+			    			$("#fileAll").append(html);
+			    			
+			        	}
+			        	
+			        }
+		    	});
+	        }
+    	});
+	})
+	
 	$("#newFile").click(function(){
 		$(".talAll").addClass("display");
 		$(".tal-2").removeClass("display");
@@ -554,6 +626,20 @@ $(function(){
     	});
 	});
 	
+	$('#addFile').change(function(e){
+        var fileMsg = e.currentTarget.files;
+        var fileName = fileMsg[0].name;
+        console.log(fileName)
+        $("#addfiletext").val(fileName);
+    });
+   
+    $('#addFile_1').change(function(e){
+        var fileMsg = e.currentTarget.files;
+        var fileName = fileMsg[0].name;
+        console.log(fileName)
+        $("#addfiletext_1").val(fileName);
+    });
+	
 	$(document).on("click",".btnLL",function(){
 		$("#table-31").empty();
 		var ssktNm = $(this).parents("tr").children(".ssktNm").html();
@@ -581,7 +667,7 @@ $(function(){
 		        	var Status = data[i].Status;
 		        	if(Status == "unchecked"){
 		        		html =  '<tr>'+
-		        					'<td style="display:none;">'+Comment_id+'</td>'+
+		        					'<td class="comment_id" style="display:none;">'+Comment_id+'</td>'+
 								    '<td style="width: 400px;">'+Content+'</td>'+
 								    '<td>'+CreatePerson+'</td>'+
 								    '<td>'+CreateDate+'</td>'+
@@ -591,7 +677,7 @@ $(function(){
 							    '</tr>';
 		        	}else{
 		        		html =  '<tr>'+
-								    '<td style="dispaly:none;">'+Comment_id+'</td>'+
+								    '<td class="comment_id" style="dispaly:none;">'+Comment_id+'</td>'+
 								    '<td style="width: 400px;">'+Content+'</td>'+
 								    '<td>'+CreatePerson+'</td>'+
 								    '<td>'+CreateDate+'</td>'+
@@ -606,6 +692,24 @@ $(function(){
 	        }
     	});
 	});
+	
+	$(document).on("click",".btnCek",function(){
+		var comment_id =  $(this).parent("td").siblings('.comment_id').html();
+		console.log(comment_id)
+		var c = {"Comment_id" : comment_id};
+		var b = JSON.stringify(c);
+		$.ajax({
+	        type:"POST", 
+	        url:"/confirm_comment/",
+	        data:b,
+	        async:true,
+	        timeout:50000,
+	        dataType:"JSON",
+	        success:function(data){
+	        	alert("确认成功");
+	        }
+    	});
+	})
 	
 	$("#zhaoHui").click(function(){
 		var ssktNm = $("#sskt321").html();
@@ -806,7 +910,7 @@ $(function(){
 		        	var Status = data[i].Status;
 		        	if(Status == "unchecked"){
 		        		html =  '<tr>'+
-		        					'<td style="display:none;">'+Comment_id+'</td>'+
+		        					'<td class="comment_id" style="display:none;">'+Comment_id+'</td>'+
 								    '<td style="width: 400px;">'+Content+'</td>'+
 								    '<td>'+CreatePerson+'</td>'+
 								    '<td>'+CreateDate+'</td>'+
@@ -816,7 +920,7 @@ $(function(){
 							    '</tr>';
 		        	}else{
 		        		html =  '<tr>'+
-								    '<td style="dispaly:none;">'+Comment_id+'</td>'+
+								    '<td class="comment_id" style="dispaly:none;">'+Comment_id+'</td>'+
 								    '<td style="width: 400px;">'+Content+'</td>'+
 								    '<td>'+CreatePerson+'</td>'+
 								    '<td>'+CreateDate+'</td>'+
@@ -854,7 +958,7 @@ $(function(){
 			ulMainNum = 0;
 		}
 	});
-	
+	//新建
 	$("#btnNewFile").click(function(){
 		var UserNameWrite = $("#addName1").val();
 		var UserNameAlias = $("#addName2").val();
@@ -1038,7 +1142,7 @@ $(function(){
 		        	var UpdateDate = data.UpdateDate;
 		        	var Status = data.Status;
 	        		var html =  '<tr>'+
-	        					'<td style="display:none;">'+Comment_id+'</td>'+
+	        					'<td class="comment_id" style="display:none;">'+Comment_id+'</td>'+
 							    '<td style="width: 400px;">'+Content+'</td>'+
 							    '<td>'+CreatePerson+'</td>'+
 							    '<td>'+CreateDate+'</td>'+

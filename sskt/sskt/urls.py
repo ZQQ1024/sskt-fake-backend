@@ -49,4 +49,6 @@ urlpatterns = [
     path('login_page/', views.login_page),      # 登录页面
     path('app_info_update/', views.update_app),     # 修改申请信息细节
     path('file_download/', views.file_download),    # 下载文件
+    path('get_all_ssktnum/', views.get_all_ssktnum),     # 获取当前所以的sskt编号
+    path('file_addto/', views.file_addto),      # 资料管理，追加文件
 ]
