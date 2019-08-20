@@ -110,7 +110,7 @@ class Comment(models.Model):
 class File(models.Model):
     ar = models.ForeignKey(ApplicationRecord, on_delete=models.CASCADE)
 
-    path = models.CharField(max_length=45)
+    path = models.CharField(max_length=512)
 
 class Group(models.Model):
     name = models.CharField(max_length=45)

@@ -345,7 +345,7 @@ def commit_app(request):
             recorder=usernameUser.username,
             lastUpdate=timezone.now())
             print('Model: ApplicationRecord save success, id: ', app_record.id)
-            sskt_num = '-'.join(['sskt', str(app_record.id)])
+            sskt_num = '-'.join(['CCTK', str(app_record.id)])
             ApplicationRecord.objects.filter(id=app_record.id).update(manager_number=sskt_num)
 
             #查找信息并提交
@@ -686,6 +686,7 @@ def confirm_comment(request):
     try:
         if request.method == 'POST':
             json_content = request.body
+            json_content = json_content.decode('utf-8')
             content = json.loads(json_content)
             comment_id = content.get('Comment_id')
             print('comment_id: ', comment_id)
@@ -972,53 +973,59 @@ def app_info_detail(request):
 
 def commit_app_uploadfile(sskt_num, filename, file_data):
     print('--------Upload file, start.--------')
+    print('sskt num: ', sskt_num)
+    print('file neme: ', filename)
+    print('file type: ', type(file_data))
     try:
         # if request.method == 'POST':
-            # 查询关联的申请记录
-            # sskt_num = request.POST.get('sskt_num')
-            app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
-            if len(app_obj) != 0:
-                app_id = app_obj[0].id
-            else:
-                app_id = -1
-            if app_id == -1:
-                print('null result searching for application')
-                raise NullResultQueryException('Loc: commit_app_uploadfile(), searching for'
-                                               ' application failed')
+        # 查询关联的申请记录
+        # sskt_num = request.POST.get('sskt_num')
+        app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
+        if len(app_obj) != 0:
+            app_id = app_obj[0].id
+        else:
+            app_id = -1
+        if app_id == -1:
+            print('null result searching for application')
+            raise NullResultQueryException('Loc: commit_app_uploadfile(), searching for'
+                                           ' application failed')
 
-            # 上传文件存储位置，不存在则新建
-            up_path = './static/uploadfile'
-            # filename = request.POST.get('file_name')
-            up_path = up_path + '/' + app_obj[0].manager_number
-            print('upload file absolute path: ', os.path.abspath(up_path))
-            folder = os.path.exists(up_path)
-            if not folder:
-                print('make dir: ', up_path)
-                os.makedirs(up_path)
+        # 上传文件存储位置，不存在则新建
+        print('Cur path: ', os.getcwd())
+        save_path = os.getcwd()
+        save_path = save_path + '/static/uploadfile/' + app_obj[0].manager_number
+        up_path = '../static/uploadfile'
+        # filename = request.POST.get('file_name')
+        up_path = up_path + '/' + app_obj[0].manager_number
+        print('upload file absolute path: ', os.path.abspath(up_path))
+        folder = os.path.exists(save_path)
+        if not folder:
+            print('make dir: ', save_path)
+            os.makedirs(save_path)
 
-            up_name = up_path + '/' + filename
-            # 文件查重
-            file_sear_obj = File.objects.filter(path=up_name)
-            if len(file_sear_obj) != 0:
-                print('uploadfile_fail, file exist')
-                raise UploadfileExistedException('Loc: commit_app_uploadfile(), upload file existed.')
+        up_name = up_path + '/' + filename
+        save_path = save_path + '/' + filename
+        # 文件查重
+        file_sear_obj = File.objects.filter(path=up_name)
+        if len(file_sear_obj) != 0:
+            print('uploadfile_fail, file exist')
+            raise UploadfileExistedException('Loc: commit_app_uploadfile(), upload file existed.')
 
+        # file_data = request.FILES.get('upload_file', None)
+        if not file_data:
+            print('None upload file')
+            raise NoneUploadfileException('Loc: commit_app_uploadfile()')
+        with open(save_path, 'wb') as f:
+            for chunk in file_data.chunks():
+                f.write(chunk)
+            print('Upload file over')
 
-
-            # file_data = request.FILES.get('upload_file', None)
-            if not file_data:
-                print('None upload file')
-                raise NoneUploadfileException('Loc: commit_app_uploadfile()')
-            with open(up_name, 'wb') as f:
-                for chunk in file_data.chunks():
-                    f.write(chunk)
-                print('Upload file over')
-
-            file_obj = File.objects.create(ar=app_obj[0], path=up_name)
-            print('Model: File save success. file id: ', file_obj.id)
+        file_obj = File.objects.create(ar=app_obj[0], path=up_name)
+        print('Model: File save success. file id: ', file_obj.id)
 
     except Exception as e:
         print('Log: upload file fail, error: ', str(e))
+        traceback.print_exc()
         res = {'res_code': 3152, 'res_msg': 'uploadfile fail', 'res_repr': str(e)}
         print('--------Upload file error, end.--------')
         return JsonResponse(res)
