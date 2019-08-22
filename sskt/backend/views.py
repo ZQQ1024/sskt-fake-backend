@@ -421,7 +421,7 @@ def commit_app(request):
         except Exception as e:
             print('Log: commit application, error: ')
             traceback.print_exc()
-            res = {'res_code': 312, 'res_msg': 'commit_app_resp', 'res_data': 'commit app fail'}
+            res = {'res_code': 3121, 'res_msg': 'commit_app_resp', 'res_data': 'commit app fail'}
         finally:
             return JsonResponse(res)
     else:

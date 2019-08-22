@@ -4,6 +4,9 @@ $(function(){
 	});
 	var person = sessionStorage.getItem("userId");
 	$("#person").html(person);
+	if(person == null){
+		window.location.href="/login_page/";
+	}
 	
 	var myDate = new Date();
 	//获取当前年
@@ -12,6 +15,13 @@ $(function(){
 	var month=myDate.getMonth()+1;
 	$("#year").html(year);
 	$("#month").html(month);
+	
+	$('#datetimepicker2').datetimepicker({
+        locale: 'zh-cn'
+    });
+    $('#datetimepicker3').datetimepicker({
+        locale: 'zh-cn'
+    });
 	
 	$.ajax({
         type:"get", 
@@ -191,6 +201,7 @@ $(function(){
 	        timeout:50000,
 	        dataType:"JSON",
 	        success:function(data){
+	        	$("#allSskt").empty();
 	        	data = data.res;
 	        	for(var i = 0;i<data.length;i++){
 	        		var html = '<option>'+data[i]+'</option>';
@@ -1028,12 +1039,13 @@ $(function(){
    			contentType: false,
 	        timeout:50000,
 	        success:function(data){
-	        	console.log(data);
 	        	if(data.res_code == 312){
 	        		alert("创建成功");
 					window.location.reload();	        		
 	        	}
-				
+				else{
+           			alert("输入有误请确认");
+          		}
 	        }
     	});
 	});
