@@ -991,8 +991,9 @@ def commit_app_uploadfile(sskt_num, filename, file_data):
                                            ' application failed')
 
         # 上传文件存储位置，不存在则新建
-        print('Cur path: ', os.getcwd())
-        save_path = os.getcwd()
+        save_path = os.path.abspath(__file__)
+        save_path = os.path.dirname(os.path.dirname(save_path))
+        print('Static file path: ', save_path)
         save_path = save_path + '/static/uploadfile/' + app_obj[0].manager_number
         up_path = '../static/uploadfile'
         # filename = request.POST.get('file_name')
