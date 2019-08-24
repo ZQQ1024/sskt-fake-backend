@@ -1349,3 +1349,42 @@ def index(request):
 
 def login_page(request):
     return render(request, 'login.html')
+
+@csrf_exempt
+@login_required
+def delete_application(request):
+    working_flag('delete_application', 'start')
+    if request.method == 'POST':
+        try:
+            user_id = request.session.get('_auth_user_id')
+            user_obj = User.objects.filter(id=user_id)
+            admin_obj = UserAdmin.objects.filter(user=user_obj[0])
+            print('user id: ', user_id, ', user name: ', user_obj[0].username)
+
+            sskt_num = request.POST.get('ssktnum')
+            app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
+            if len(app_obj)>0:
+                if len(admin_obj):
+                    if admin_obj[0].is_admin == 1:
+                        ApplicationRecord.objects.filter(manager_number=sskt_num).delete()
+                        print('sskt-num: ', sskt_num, ', application delete success.')
+                    else:
+                        print('User: ', user_obj.username, 'not admin.')
+                else:
+                    print('User: ', user_obj.username, 'not in admin-user.')
+            else:
+                raise NullResultQueryException('Loc: delete_application(), sskt num not exist, ', sskt_num)
+        except Exception as e:
+            res = {'res_code': 3182, 'res_msg': 'application delete fail'}
+            traceback.print_exc()
+            working_flag('delete_application', 'error')
+            return JsonResponse(res)
+        else:
+            res = {'res_code': 3181, 'res_msg': 'application delete success'}
+            working_flag('delete_application', 'end')
+            return JsonResponse(res)
+    else:
+        res = {'res_code': 3182, 'res_msg': 'needing POST'}
+        working_flag('delete_application', 'error')
+        return JsonResponse(res)
+
