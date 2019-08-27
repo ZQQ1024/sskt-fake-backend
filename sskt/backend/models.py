@@ -104,7 +104,7 @@ class Comment(models.Model):
     updatePerson = models.CharField(max_length=45)
     updateDate = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=45, default='unchecked')
-    content = models.CharField(max_length=45)
+    content = models.CharField(max_length=1024)
 
 
 class File(models.Model):

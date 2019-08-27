@@ -308,17 +308,27 @@ def update_app(request):
                             tip = Tip.objects.create(ar=app_obj[0],
                                                      tip=tip_info.get('tip'))
                             print('Model: Tip rebuild success, id: ', tip.ar_id)
-                app_obj.update(updater=usernameUser.username,
-                               lastUpdate=timezone.now())
-                res = {'res_code': 3122, 'res_msg': 'update_app_resp', 'res_data': 'update app success'}
+                useradmin_obj = UserAdmin.objects.filter(user=usernameUser)
+                if len(useradmin_obj>0):
+                    if useradmin_obj[0].is_admin == 1:
+                        app_obj.update(updater=usernameUser.username,
+                                       recorder=usernameUser.username,
+                                       lastUpdate=timezone.now())
+                    else:
+                        app_obj.update(updater=usernameUser.username,
+                                       lastUpdate=timezone.now())
+                else:
+                    app_obj.update(updater=usernameUser.username,
+                                    lastUpdate=timezone.now())
+                res = {'res_code': 31221, 'res_msg': 'update_app_resp', 'res_data': 'update app success'}
             else:
                 raise NoMatchingAppException('Loc: update_app(). app sskt num: ', sskt_num)
         else:
-            res = {'res_code': 3122, 'res_msg': 'update_app_resp', 'res_data': 'update app success'}
+            res = {'res_code': 31222, 'res_msg': 'update_app_resp', 'res_data': 'update app fail, need POST'}
     except Exception as e:
         print('Log: update application info, error: ')
         traceback.print_exc()
-        res = {'res_code': 3122, 'res_msg': 'update_app_resp', 'res_data': 'update app fail'}
+        res = {'res_code': 31222, 'res_msg': 'update_app_resp', 'res_data': 'update app fail'}
     finally:
         return JsonResponse(res)
 
@@ -1388,3 +1398,29 @@ def delete_application(request):
         working_flag('delete_application', 'error')
         return JsonResponse(res)
 
+@csrf_exempt
+@login_required
+def change_appinfo_status(request):
+    working_flag('change_appinfo_status', 'start')
+    if request.method == 'POST':
+        try:
+            sskt_num = request.POST.get('ssktnum')
+            app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
+            status_num = request.POST.get('statusnum')
+            if len(app_obj)>0:
+                app_obj.update(status=int(status_num))
+            else:
+                raise NullResultQueryException('Loc: change_appinfo_status(), sskt num not exist, ', sskt_num)
+        except Exception as e:
+            res = {'res_code': 3192, 'res_msg': 'change app status fail'}
+            traceback.print_exc()
+            working_flag('change_appinfo_status', 'error')
+            return JsonResponse(res)
+        else:
+            res = {'res_code': 3191, 'res_msg': 'change app status success'}
+            working_flag('change_appinfo_status', 'end')
+            return JsonResponse(res)
+    else:
+        res = {'res_code': 3192, 'res_msg': 'needing POST'}
+        working_flag('change_appinfo_status', 'error')
+        return JsonResponse(res)

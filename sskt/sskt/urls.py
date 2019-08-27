@@ -52,4 +52,5 @@ urlpatterns = [
     path('get_all_ssktnum/', views.get_all_ssktnum),     # 获取当前所以的sskt编号
     path('file_addto/', views.file_addto),      # 资料管理，追加文件
     path('delete_app/', views.delete_application),       # 删除申请内容
+    path('change_appinfo_status/', views.change_appinfo_status),         #修改申请状态
 ]
