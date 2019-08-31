@@ -10,7 +10,7 @@ from django.utils import timezone
 from datetime import datetime
 from .custom_exception import NullResultQueryException, NoneUploadfileException, UploadfileExistedException,\
     NoMatchingAppException, ConfirmCommentFailException, UserGroupErrorException, GroupErrorException,\
-    AddGroupErrorException, NameCollecErrorException, ApplicationInfoErrorException
+    AddGroupErrorException, NameCollecErrorException, ApplicationInfoErrorException, AdminErrorException
 from .tools import cus_quick_sort
 import os
 import copy
@@ -182,6 +182,11 @@ def update_app(request):
         loginedUserId = request.session.get('_auth_user_id')
         usernameUser = User.objects.get(id=loginedUserId)
         print('Logined user: ', usernameUser, ', type', type(usernameUser))
+        useradmin_obj = UserAdmin.objects.filter(user=usernameUser)
+        if len(useradmin_obj) == 0:
+            raise AdminErrorException('Loc: update_app. User: ', usernameUser)
+        if useradmin_obj[0].is_admin != 1:
+            raise AdminErrorException('Loc: update_app. User: ', usernameUser)
 
         if not check_appinfo(request.POST):
             raise ApplicationInfoErrorException('Check app info fail')
@@ -309,7 +314,7 @@ def update_app(request):
                                                      tip=tip_info.get('tip'))
                             print('Model: Tip rebuild success, id: ', tip.ar_id)
                 useradmin_obj = UserAdmin.objects.filter(user=usernameUser)
-                if len(useradmin_obj>0):
+                if len(useradmin_obj)>0:
                     if useradmin_obj[0].is_admin == 1:
                         app_obj.update(updater=usernameUser.username,
                                        recorder=usernameUser.username,
@@ -575,9 +580,9 @@ def applications_info(request):
     res_data = []
     try:
         user_id = request.session.get('_auth_user_id')
-        user_obj = User.objects.filter(id=user_id)
+        login_user_obj = User.objects.filter(id=user_id)
         # print(user_obj[0].username, ' ', type(user_obj[0].username))
-        name_collec = get_name_collec(user_obj[0].username)
+        name_collec = get_name_collec(login_user_obj[0].username)
         # name_collec = []
         print('Name collection: ', name_collec)
 
@@ -641,8 +646,16 @@ def applications_info(request):
             if len(comment_objs) != 0:
                 for j in comment_objs:
                     if j.status == 'unchecked':
-                        spe_flag = 0
-                        break
+                        # 登录者为担当
+                        if login_user_obj[0].username == user_obj.username:
+                            if j.createPerson == i.recorder:
+                                spe_flag = 0
+                                break
+                        # 登陆者为事务
+                        if login_user_obj[0].username == i.recorder:
+                            if j.createPerson == user_obj.username:
+                                spe_flag = 0
+                                break
                 if spe_flag == 0:
                     app_item.setdefault('specify_flag', 'RED')
                 elif spe_flag == 1:
