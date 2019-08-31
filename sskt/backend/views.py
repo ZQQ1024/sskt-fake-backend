@@ -604,6 +604,20 @@ def applications_info(request):
             app_item.setdefault('commit_time', i.createDate)
             print('Base info finished')
 
+            file_obj = File.objects.filter(ar_id=i.id)
+            if len(file_obj) > 0:
+                print('file_name: ', file_obj[0].path)
+                if '\\' in file_obj[0].path:
+                    app_item.setdefault('file_name', file_obj[0].path.split('\\')[-1])
+                elif '/' in file_obj[0].path:
+                    app_item.setdefault('file_name', file_obj[0].path.split('/')[-1])
+                else:
+                    app_item.setdefault('file_name', file_obj[0].path)
+            else:
+                app_item.setdefault('file_name', 'None')
+
+            print('File info finished')
+
             manager_obj = Company.objects.filter(ar_id=i.id)
             if len(manager_obj) != 0:
                 app_item.setdefault('manager_name', manager_obj[0].managerCompanyName)
