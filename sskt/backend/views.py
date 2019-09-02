@@ -1123,8 +1123,14 @@ def maincontent_info(request):
         has_name=[]
         rank_temp = {'rank': 0, 'username': 'null', 'money': 0, 'number': 0}
         app_objs = ApplicationRecord.objects.all()
+        cur_month = datetime.strftime(datetime.now(), '%D').split('/')[0]
+        # print('cur month: ', cur_month)
         if len(app_objs) > 0:
             for i in app_objs:
+                # print(i.createDate, ' ', type(i.createDate))
+                app_month = str(i.createDate).split('-')[1]
+                if int(cur_month != app_month):
+                    continue
                 print('username: ', i.seller.username)
                 if i.seller.username in has_name:
                     # working_flag('fun!!!', '1')
