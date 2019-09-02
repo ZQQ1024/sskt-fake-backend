@@ -1051,9 +1051,15 @@ def commit_app_uploadfile(sskt_num, filename, file_data):
         save_path = save_path + '/' + filename
         # 文件查重
         file_sear_obj = File.objects.filter(path=up_name)
+        file_id = 0
         if len(file_sear_obj) != 0:
-            print('uploadfile_fail, file exist')
-            raise UploadfileExistedException('Loc: commit_app_uploadfile(), upload file existed.')
+            # print('uploadfile_fail, file exist')
+            # raise UploadfileExistedException('Loc: commit_app_uploadfile(), upload file existed.')
+            file_sear_obj.update(path=up_name)
+            file_id = file_sear_obj[0].id
+        else:
+            file_obj = File.objects.create(ar=app_obj[0], path=up_name)
+            file_id = file_obj.id
 
         # file_data = request.FILES.get('upload_file', None)
         if not file_data:
@@ -1064,8 +1070,7 @@ def commit_app_uploadfile(sskt_num, filename, file_data):
                 f.write(chunk)
             print('Upload file over')
 
-        file_obj = File.objects.create(ar=app_obj[0], path=up_name)
-        print('Model: File save success. file id: ', file_obj.id)
+        print('Model: File save success. file id: ', file_id)
 
     except Exception as e:
         print('Log: upload file fail, error: ', str(e))
