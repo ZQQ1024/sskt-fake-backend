@@ -143,11 +143,17 @@ def form2json(content):
     return json.dumps(temp_dict)
 
 def get_date_detail(str):
-    year = str.split('年')[0]
-    new_str = str.split('年')[1]
-    month = new_str.split('月')[0]
-    new_str = new_str.split('月')[1]
-    day = new_str.split('日')[0]
+    if '年' in str:
+        year = str.split('年')[0]
+        new_str = str.split('年')[1]
+        month = new_str.split('月')[0]
+        new_str = new_str.split('月')[1]
+        day = new_str.split('日')[0]
+    else:
+        str = str.split(r' ')[0]
+        year = str.split('/')[2]
+        month = str.split('/')[0]
+        day = str.split('/')[1]
 
     return '-'.join([year, month, day])
 

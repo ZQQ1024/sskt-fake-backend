@@ -92,7 +92,7 @@ class Tip(models.Model):
         primary_key=True,
     )
 
-    tip = models.CharField(max_length=45)
+    tip = models.CharField(max_length=512)
 
 
 class Comment(models.Model):
