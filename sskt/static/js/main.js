@@ -16,12 +16,15 @@ $(function(){
 	$("#year").html(year);
 	$("#month").html(month);
 	
-	$('#datetimepicker2').datetimepicker({
-        locale: 'zh-cn'
-    });
-    $('#datetimepicker3').datetimepicker({
-        locale: 'zh-cn'
-    });
+	
+ 
+    
+//$(document).on("datetimepicker","#rili2",function(){
+//	locale: 'zh-cn'
+//});
+//$(document).on("datetimepicker","#rili1",function(){
+// 	locale: 'zh-cn'
+//});
 	
 	$.ajax({
         type:"get", 
@@ -601,12 +604,22 @@ $(function(){
 		    				'<div class="row" style="margin: 0;margin-top: 20px;">'+
 		    					'<h4 style="margin-left:58px;">入契日情报</h4>'+
 		    					'<div class="row" style="margin: 0;">'+
-		    						'<input id="addTime1c" style="width: 650px;float: right;margin-right: 360px;" value="'+SettlementDate+'" />'+
-		    						'<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入住日</p>'+
+		    						'<div class="input-group date" id="rili1" data-target-input="nearest" style="float: right;margin-right: 330px;">'+
+		    							 '<div class="input-group-append" data-target="#rili1" data-toggle="datetimepicker" style="float: right;">'+
+					                       ' <div class="input-group-text"><i class="fa fa-calendar" style="font-size: 18px;line-height: 35px;margin-left: 15px;"></i></div>'+
+					                   ' </div>'+
+					                    '<input id="addTime1c" type="text" class="form-control datetimepicker-input" style="width: 650px;float: right;" data-target="#rili1" value="'+SettlementDate+'"/>'+
+					                '</div>'+
+					                '<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">入住日</p>'+
 		    					'</div>'+
 		    					'<div class="row" style="margin: 0;margin-top: 20px;">'+
-		    						'<input id="addTime2c" style="width: 650px;float: right;margin-right: 360px;" value="'+ContractDate+'" />'+
-		    						'<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">合同日</p>'+
+		    						'<div class="input-group date" id="rili2" data-target-input="nearest" style="float: right;margin-right: 330px;">'+
+		    							' <div class="input-group-append" data-target="#rili2" data-toggle="datetimepicker" style="float: right;">'+
+					                        '<div class="input-group-text"><i class="fa fa-calendar" style="font-size: 18px;line-height: 35px;margin-left: 15px;"></i></div>'+
+					                    '</div>'+
+					                   ' <input id="addTime2c" type="text" class="form-control datetimepicker-input" style="width: 650px;float: right;" data-target="#rili2" value="'+ContractDate+'"/>'+
+					                '</div>'+
+					               ' <p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">合同日</p>'+
 		    					'</div>'+
 		    				'</div>'+
 		    				'<div class="row" style="margin: 0;margin-top: 20px;">'+
@@ -636,6 +649,15 @@ $(function(){
 	        }
     	});
 	});
+	
+	
+	$(document).on("click",".cansle",function(){
+		console.log("11")
+		$(".main").addClass("display");
+		$(".main-2").removeClass("display");
+		$(".talAll").addClass("display");
+		$(".tal-1").removeClass("display");
+	})
 	
 	$('#addFile').change(function(e){
         var fileMsg = e.currentTarget.files;
@@ -888,6 +910,9 @@ $(function(){
 		    						'<p style="float: right;margin: 0;line-height: 26px;font-size: 16px;font-weight: bold;margin-right: 40px;">备注</p>'+
 		    					'</div>'+
 		    				'</div>'+
+		    				'<div class="row" style="margin: 0;display: flex;align-items: center;justify-content: center;margin-top: 20px;margin-bottom: 20px;">'+
+				    			'<button class="btn cansle" style="background-color:#00BBE9;margin-left: 40px;">取消</button>'+
+				    		'</div>'+
 				    		'<button type="button" class="btn btn-default buttonLX" id="lianXi1">联系</button>';
 				$(".xiuz").append(html);   	
 	        }
@@ -1121,9 +1146,11 @@ $(function(){
 	        timeout:50000,
 	        dataType:"JSON",
 	        success:function(data){
-	        	if(data.res_code == 3121){
+	        	if(data.res_code == 31221){
 	        		alert("修改成功");
 					window.location.reload();	        		
+	        	}else{
+	        		alert("修改失败");
 	        	}
 	        }
     	});
@@ -1164,6 +1191,7 @@ $(function(){
 						    '</tr>';
 		        	alert("留言成功")
 		        	$("#table-31").append(html);
+		        	document.getElementById("addChat").value="";
 		        }
 	    	});
 		}
