@@ -169,7 +169,7 @@ $(function(){
 							    '</td>'+
 						    '</tr>';
 					}else if(specify_flag == "RED"){
-						html = '<tr style="background: red;">'+
+						html = '<tr style="background: 	LightCoral;">'+
 							    '<td class="ssktNm">'+manager_number+'</td>'+
 							    '<td>'+manager_name+'</td>'+
 							    '<td>'+manager_phone+'</td>'+
