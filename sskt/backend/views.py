@@ -1091,7 +1091,7 @@ def doc(request):
     try:
         res_data = []
         file_content = {}
-        file_obj = File.objects.all()
+        file_obj = File.objects.all().order_by('-ar_id')
         print('start making file content dict')
         for i in file_obj:
             # print(i.ar_id, i.path)
