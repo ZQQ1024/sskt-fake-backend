@@ -362,9 +362,9 @@ def commit_app(request):
 
             #添加申请记录的基本信息
             app_record = ApplicationRecord.objects.create(seller=usernameUser,
-            updater=usernameUser.username,
-            recorder=usernameUser.username,
-            lastUpdate=timezone.now())
+                                                          updater=usernameUser.username,
+                                                          recorder='None',
+                                                          lastUpdate=timezone.now())
             print('Model: ApplicationRecord save success, id: ', app_record.id)
             sskt_num = '-'.join(['CCTK', str(app_record.id)])
             ApplicationRecord.objects.filter(id=app_record.id).update(manager_number=sskt_num)
@@ -459,6 +459,11 @@ def commit_comment_msg(request):
             loginedUserId = request.session.get('_auth_user_id')
             usernameUser = User.objects.get(id=loginedUserId)
             print('Logined user: ', usernameUser, ', type', type(usernameUser))
+            admin_flag = 0
+            login_useradmin_obj = UserAdmin.objects.filter(user=usernameUser)
+            if len(login_useradmin_obj) > 0:
+                if login_useradmin_obj[0].is_admin == 1:
+                    admin_flag = 1
 
             content_result = request.body.decode('utf-8')
             # print(content_result)
@@ -473,6 +478,13 @@ def commit_comment_msg(request):
                                                     createPerson=usernameUser.username,
                                                     updatePerson=usernameUser.username,
                                                     content=comment_content)
+                if admin_flag == 1:
+                    app_obj.update(recorder=usernameUser.username,
+                                   updater=usernameUser.username,
+                                   lastUpdate=timezone.now())
+                else:
+                    app_obj.update(updater=usernameUser.username,
+                                   lastUpdate=timezone.now())
                 print('Model: Comment save success, id: ', comment_obj.ar_id)
 
                 res_item = {}
@@ -649,23 +661,33 @@ def applications_info(request):
             # 标红状态
             comment_objs = Comment.objects.filter(ar_id=i.id)
             spe_flag = 1
+            print('------------------app status start----------------')
             if len(comment_objs) != 0:
                 for j in comment_objs:
                     if j.status == 'unchecked':
-                        # 登录者为担当
+                        # 登录者是申请的创建者
                         if login_user_obj[0].username == user_obj.username:
-                            if j.createPerson == i.recorder:
+                            if j.createPerson != login_user_obj[0].username:
                                 spe_flag = 0
                                 break
                         # 登陆者为事务
-                        if login_user_obj[0].username == i.recorder:
-                            if j.createPerson == user_obj.username:
-                                spe_flag = 0
-                                break
+                        login_useradmin_obj = UserAdmin.objects.filter(user=login_user_obj[0])
+                        if len(login_useradmin_obj) > 0:
+                            if login_useradmin_obj[0].is_admin == 1:
+                                app_useradmin_obj = UserAdmin.objects.filter(user=\
+                                                    User.objects.get(username=j.createPerson))
+                                if len(app_useradmin_obj) > 0:
+                                    if app_useradmin_obj[0].is_admin != 1:
+                                        spe_flag = 0
+                                        break
+                                else:
+                                    spe_flag = 0
+                                    break
                 if spe_flag == 0:
                     app_item.setdefault('specify_flag', 'RED')
                 elif spe_flag == 1:
                     app_item.setdefault('specify_flag', 'NORMAL')
+                print('------------------app status end----------------')
             else:
                 app_item.setdefault('specify_flag', 'NORMAL')
             print('Specify_flag info finished')
