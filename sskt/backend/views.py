@@ -1042,57 +1042,60 @@ def commit_app_uploadfile(sskt_num, filename, file_data):
     print('file neme: ', filename)
     print('file type: ', type(file_data))
     try:
-        # if request.method == 'POST':
-        # 查询关联的申请记录
-        # sskt_num = request.POST.get('sskt_num')
-        app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
-        if len(app_obj) != 0:
-            app_id = app_obj[0].id
+        if file_data is not None and filename is not None:
+            # if request.method == 'POST':
+            # 查询关联的申请记录
+            # sskt_num = request.POST.get('sskt_num')
+            app_obj = ApplicationRecord.objects.filter(manager_number=sskt_num)
+            if len(app_obj) != 0:
+                app_id = app_obj[0].id
+            else:
+                app_id = -1
+            if app_id == -1:
+                print('null result searching for application')
+                raise NullResultQueryException('Loc: commit_app_uploadfile(), searching for'
+                                               ' application failed')
+
+            # 上传文件存储位置，不存在则新建
+            save_path = os.path.abspath(__file__)
+            save_path = os.path.dirname(os.path.dirname(save_path))
+            print('Static file path: ', save_path)
+            save_path = save_path + '/static/uploadfile/' + app_obj[0].manager_number
+            up_path = '../static/uploadfile'
+            # filename = request.POST.get('file_name')
+            up_path = up_path + '/' + app_obj[0].manager_number
+            print('upload file absolute path: ', os.path.abspath(up_path))
+            folder = os.path.exists(save_path)
+            if not folder:
+                print('make dir: ', save_path)
+                os.makedirs(save_path)
+
+            up_name = up_path + '/' + filename
+            save_path = save_path + '/' + filename
+            # 文件查重
+            file_sear_obj = File.objects.filter(path=up_name)
+            file_id = 0
+            if len(file_sear_obj) != 0:
+                # print('uploadfile_fail, file exist')
+                # raise UploadfileExistedException('Loc: commit_app_uploadfile(), upload file existed.')
+                file_sear_obj.update(path=up_name)
+                file_id = file_sear_obj[0].id
+            else:
+                file_obj = File.objects.create(ar=app_obj[0], path=up_name)
+                file_id = file_obj.id
+
+            # file_data = request.FILES.get('upload_file', None)
+            if not file_data:
+                print('Upload file data is null')
+                raise NoneUploadfileException('Loc: commit_app_uploadfile()')
+            with open(save_path, 'wb') as f:
+                for chunk in file_data.chunks():
+                    f.write(chunk)
+                print('Upload file over')
+
+            print('Model: File save success. file id: ', file_id)
         else:
-            app_id = -1
-        if app_id == -1:
-            print('null result searching for application')
-            raise NullResultQueryException('Loc: commit_app_uploadfile(), searching for'
-                                           ' application failed')
-
-        # 上传文件存储位置，不存在则新建
-        save_path = os.path.abspath(__file__)
-        save_path = os.path.dirname(os.path.dirname(save_path))
-        print('Static file path: ', save_path)
-        save_path = save_path + '/static/uploadfile/' + app_obj[0].manager_number
-        up_path = '../static/uploadfile'
-        # filename = request.POST.get('file_name')
-        up_path = up_path + '/' + app_obj[0].manager_number
-        print('upload file absolute path: ', os.path.abspath(up_path))
-        folder = os.path.exists(save_path)
-        if not folder:
-            print('make dir: ', save_path)
-            os.makedirs(save_path)
-
-        up_name = up_path + '/' + filename
-        save_path = save_path + '/' + filename
-        # 文件查重
-        file_sear_obj = File.objects.filter(path=up_name)
-        file_id = 0
-        if len(file_sear_obj) != 0:
-            # print('uploadfile_fail, file exist')
-            # raise UploadfileExistedException('Loc: commit_app_uploadfile(), upload file existed.')
-            file_sear_obj.update(path=up_name)
-            file_id = file_sear_obj[0].id
-        else:
-            file_obj = File.objects.create(ar=app_obj[0], path=up_name)
-            file_id = file_obj.id
-
-        # file_data = request.FILES.get('upload_file', None)
-        if not file_data:
-            print('None upload file')
-            raise NoneUploadfileException('Loc: commit_app_uploadfile()')
-        with open(save_path, 'wb') as f:
-            for chunk in file_data.chunks():
-                f.write(chunk)
-            print('Upload file over')
-
-        print('Model: File save success. file id: ', file_id)
+            print('No upload file')
 
     except Exception as e:
         print('Log: upload file fail, error: ', str(e))
