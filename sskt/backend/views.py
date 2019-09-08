@@ -149,11 +149,16 @@ def get_date_detail(str):
         month = new_str.split('月')[0]
         new_str = new_str.split('月')[1]
         day = new_str.split('日')[0]
-    else:
+    elif '/' in str:
         str = str.split(r' ')[0]
         year = str.split('/')[2]
         month = str.split('/')[0]
         day = str.split('/')[1]
+    elif '-' in str:
+        str = str.split(r' ')[0]
+        year = str.split('-')[0]
+        month = str.split('-')[1]
+        day = str.split('-')[2]
 
     return '-'.join([year, month, day])
 
@@ -189,10 +194,10 @@ def update_app(request):
         usernameUser = User.objects.get(id=loginedUserId)
         print('Logined user: ', usernameUser, ', type', type(usernameUser))
         useradmin_obj = UserAdmin.objects.filter(user=usernameUser)
-        if len(useradmin_obj) == 0:
-            raise AdminErrorException('Loc: update_app. User: ', usernameUser)
-        if useradmin_obj[0].is_admin != 1:
-            raise AdminErrorException('Loc: update_app. User: ', usernameUser)
+        # if len(useradmin_obj) == 0:
+        #     raise AdminErrorException('Loc: update_app. User: ', usernameUser)
+        # if useradmin_obj[0].is_admin != 1:
+        #     raise AdminErrorException('Loc: update_app. User: ', usernameUser)
 
         if not check_appinfo(request.POST):
             raise ApplicationInfoErrorException('Check app info fail')
