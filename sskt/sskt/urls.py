@@ -45,6 +45,7 @@ urlpatterns = [
     path('permission_add_group/', views.permission_add_group),      # 添加权限组
     path('permission_add_user_to_group/', views.permission_add_user_to_group),      # 权限组添加用户
     path('permission_add_group_leader/', views.permission_addgroup_leader),     # 权限组添加组长
+    path('', views.index),          # index界面
     path('index/', views.index),    # index页面
     path('login_page/', views.login_page),      # 登录页面
     path('app_info_update/', views.update_app),     # 修改申请信息细节
