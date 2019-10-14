@@ -166,6 +166,7 @@ $(function(){
 							    '<td>'+
 							    	'<button class="btn btn-success btn-xs btnZH">照会</button>'+
 									'<button class="btn btn-primary btn-xs btnLL">联络</button>'+
+									'<button class="btn btn-danger btn-xs btnCan">删除</button>'+
 							    '</td>'+
 						    '</tr>';
 					}else if(specify_flag == "RED"){
@@ -184,6 +185,7 @@ $(function(){
 							    '<td>'+
 							    	'<button class="btn btn-success btn-xs btnZH">照会</button>'+
 									'<button class="btn btn-primary btn-xs btnLL">联络</button>'+
+									'<button class="btn btn-danger btn-xs btnCan">删除</button>'+
 							    '</td>'+
 						    '</tr>';
 					}
@@ -722,6 +724,23 @@ $(function(){
 		        	$("#table-31").append(html);
 	        	}
 	        	$("#table-31").append(html1);
+	        }
+    	});
+	});
+	
+	$(document).on("click",".btnCan",function(){
+		var ssktNm = $(this).parents("tr").children(".ssktNm").html();
+		var c = {"ssktnum" : ssktNm};
+		var html1 = '<p id="sskt321" class="display">'+ssktNm+'</p>';
+		$.ajax({
+	        type:"POST", 
+	        url:"/delete_app/",
+	        data:c,
+	        async:true,
+	        timeout:50000,
+	        dataType:"JSON",
+	        success:function(data){
+	        	window.location.reload();
 	        }
     	});
 	});
