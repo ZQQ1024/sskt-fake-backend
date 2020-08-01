@@ -1174,7 +1174,7 @@ def maincontent_info(request):
                 app_year = str(i.createDate).split('-')[0]
                 if int(cur_month != app_month):
                     continue
-                if int(cur_year != app_year):
+                if cur_year != int(app_year):
                     continue
                 print('username: ', i.seller.username)
                 if i.seller.username in has_name:
